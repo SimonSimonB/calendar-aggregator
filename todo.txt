@@ -1,0 +1,5 @@
+* prototype a calendar extractor service
+  * turn it into a REST service
+  * later
+    * improve text extraction
+    * improve datetime extraction
