@@ -1,10 +1,11 @@
 use chrono::{NaiveDateTime, NaiveDate};
 use regex::Regex;
+use serde::ser::{Serializer, SerializeStructVariant};
 use scraper::{ElementRef};
 use url::{Url};
 use std::{error::Error, fmt::{self}};
 
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize)]
 pub struct EventTimeRange {
   pub start: NaiveDateWithOptionalTime,
   pub end: Option<NaiveDateWithOptionalTime>,
@@ -16,13 +17,33 @@ pub enum NaiveDateWithOptionalTime {
   NaiveDateTime(NaiveDateTime),
 }
 
+impl serde::Serialize for NaiveDateWithOptionalTime {
+  fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+  where
+      S: Serializer,
+  {
+    match self {
+      NaiveDateWithOptionalTime::NaiveDate(d) => {
+        let mut sv = serializer.serialize_struct_variant("E", 0, "NaiveDate", 1)?;
+        sv.serialize_field("date", &d.to_string())?;
+        sv.end()
+      },
+      NaiveDateWithOptionalTime::NaiveDateTime(d) => {
+        let mut sv = serializer.serialize_struct_variant("E", 0, "NaiveDateTime", 1)?;
+        sv.serialize_field("date", &d.to_string())?;
+        sv.end()
+      },
+    }
+  }
+}
+
 impl From<NaiveDate> for NaiveDateWithOptionalTime {
   fn from(date: NaiveDate) -> Self {
     NaiveDateWithOptionalTime::NaiveDate(date)
   }
 }
 
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize)]
 pub struct Event {
   pub text: String,
   pub time: EventTimeRange,
@@ -125,17 +146,13 @@ fn extract_text(div: &ElementRef) -> String {
   Regex::new(r"\s+").unwrap().replace_all(&all_text, " ").to_string()
 }
 
-fn get(url: Url) -> Result<String, reqwest::Error> {
-  let response = reqwest::blocking::get(url)
-  .unwrap()
-  .text();
-
-  return response;
+async fn get(url: Url) -> Result<String, reqwest::Error> {
+  reqwest::get(url).await?.text().await
 }
 
-pub fn extract(url: &str) -> Result<Vec<Event>, Box<dyn Error>> {
+pub async fn extract(url: &str) -> Result<Vec<Event>, Box<dyn Error>> {
   let url_parsed = Url::parse(url)?;
-  let website_code = get(url_parsed)?;
+  let website_code = get(url_parsed).await?;
   Ok(code_to_events(&website_code))
 }
 
