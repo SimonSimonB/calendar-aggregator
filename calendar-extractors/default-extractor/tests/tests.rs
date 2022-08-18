@@ -1,13 +1,13 @@
 use std::{fs, path::PathBuf};
 
-use default_extractor::code_to_events;
+use default_extractor::extractors::{smallest_div_with_date::SmallestDivWithDateExtractor, EventExtractor};
 
 #[test]
 fn test_no_events_from_google_landing_page() {
   let test_response = get_test_response("google.html");
   println!("{}", test_response);
 
-  let results = code_to_events(&test_response);
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
   assert!(results.is_empty());
 }
 
@@ -15,11 +15,7 @@ fn test_no_events_from_google_landing_page() {
 fn test_some_events_from_theater_essen() {
   let test_response = get_test_response("theater-essen.html");
 
-  let results = code_to_events(&test_response);
-  // println!("{}", results.len());
-  // for result in results {
-  //   println!("{}\n{}", result.start, Regex::new(r"\s+").unwrap().replace_all(&result.text, " "));
-  // }
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
   assert!(10 < results.len());
   assert!(results.len() < 70);
 }
@@ -28,7 +24,7 @@ fn test_some_events_from_theater_essen() {
 fn test_some_events_from_ruhr_museum() {
   let test_response = get_test_response("ruhr-museum.html");
 
-  let results = code_to_events(&test_response);
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
   assert!(10 < results.len());
   assert!(results.len() < 70);
 }

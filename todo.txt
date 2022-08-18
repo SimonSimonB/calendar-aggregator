@@ -1,5 +1,7 @@
 * prototype a calendar extractor service
-  * turn it into a REST service
+  * write a second extractor
+    * detect datetimes, and then find largest non-overlapping divs, and then take each to be one event
+    * in python?
   * later
     * improve text extraction
     * improve datetime extraction

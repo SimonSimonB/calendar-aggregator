@@ -1,5 +1,5 @@
 use std::env;
-use default_extractor::Event;
+use default_extractor::extractors::{Event};
 use rocket::serde::json::Json;
 use serde::Deserialize;
 use rocket::fs::FileServer;
