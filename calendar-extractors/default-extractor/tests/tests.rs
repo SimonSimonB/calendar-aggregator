@@ -28,6 +28,7 @@ fn test_some_events_from_ruhr_museum() {
   let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
   assert!(10 < results.len());
   assert!(results.len() < 70);
+  assert!(results.into_iter().find(|r| r.text.contains("Geschichte")).is_some())
 }
 
 #[test]
@@ -37,9 +38,31 @@ fn test_some_events_from_tonhalle() {
   let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
   assert!(10 < results.len());
   assert!(results.len() < 70);
+  assert!(results.into_iter().find(|r| r.text.contains("Mozart")).is_some())
 }
 
 #[test]
+fn test_some_events_from_koelner_philharmonie() {
+  let test_response = get_test_response("koelner-philharmonie.html");
+
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
+  assert!(10 < results.len());
+  assert!(results.len() < 70);
+  assert!(results.into_iter().find(|r| r.text.contains("Haydn")).is_some())
+}
+
+#[test]
+fn test_some_events_from_elbphilharmonie() {
+  let test_response = get_test_response("elbphilharmonie.html");
+
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
+  assert!(10 < results.len());
+  assert!(results.len() < 70);
+  assert!(results.into_iter().find(|r| r.text.contains("THE PHILADELPHIA ORCHESTRA")).is_some())
+}
+
+#[test]
+#[ignore]
 // To get this test to work, you'll need to switch from HTTP request to headless browser executing the JS.
 fn test_some_events_from_radio_essen() {
   let test_response = get_test_response("radio-essen.html");

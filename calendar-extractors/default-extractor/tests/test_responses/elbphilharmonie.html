@@ -1,0 +1,2387 @@
+
+
+
+
+<!DOCTYPE HTML>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" class="no-touch">
+<head>
+	<title>All Events - Elbphilharmonie</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Discover all the concerts at the Elbphilharmonie and Laeiszhalle and book tickets now.">
+	<meta name="robots" content="index, follow">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+	<meta name="google-site-verification" content="JoUZ76dl6PXwuYZNAvCEgfVwns43082LWUvWr3_YDGg">
+	<meta name="msvalidate.01" content="9AFB81202CCFE43F4652998779EE4914">
+
+	<link rel="shortcut icon" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon.edbb048cd1b1.ico">
+	<link rel="shortcut icon" sizes="196x196" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon-196.8d8dfca262e2.png">
+	<link rel="icon" sizes="128x128" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon-128.529d6ecb723a.png">
+	<link rel="icon" sizes="192x192" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon-192.7e5f03037d27.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon-152.3a9a6b59eb84.png">
+	<link rel="apple-touch-icon" sizes="167x167" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon-167.605865468ee6.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="https://d3c80vss50ue25.cloudfront.net/static/images/favicons/favicon-180.eefc81e025b8.png">
+
+	<link rel="preconnect" href="https://shop.elbphilharmonie.de/">
+	<link rel="dns-prefetch" href="https://shop.elbphilharmonie.de/">
+	<link rel="preconnect" href="https://cdn.elbphilharmonie.de/">
+	<link rel="dns-prefetch" href="https://cdn.elbphilharmonie.de/">
+	<link rel="dns-prefetch" href="https://merkliste.elbphilharmonie.de/">
+
+	
+	<link rel="alternate" href="/de/programm/" hreflang="de">
+	
+	<link rel="alternate" href="/en/whats-on/" hreflang="en">
+	
+	<link rel="alternate" hreflang="x-default" href="https://www.elbphilharmonie.de/en/whats-on/">
+
+	<link href="https://d3c80vss50ue25.cloudfront.net/static/css/build/app.min.e445a29ff8c4.css" rel="stylesheet">
+
+	
+
+	
+
+	<script language="javascript">
+		var DjangoApp = {
+			settings: {
+				STATIC_URL: "https://d3c80vss50ue25.cloudfront.net/static/",
+				LANGUAGE_CODE: "en",
+				ACTIVITY_ID: "",
+				
+				SEARCH_URL_AJAX: "/en/search/ajax/1/",
+				SEARCH_URL: "/en/search/",
+				
+				NEWSLETTER_ENABLED: true,
+				
+				API_USER_ENABLED: true,
+				
+				API_VIMEO_VIDEOS: "https://www.elbphilharmonie.de/de/api/vimeo/videos/VIMEOID/",
+				API_USER_DETAIL: "https://api.elbphilharmonie.de/de/api/user/",
+				API_CART_DETAIL: "https://api.elbphilharmonie.de/de/api/cart/",
+				SITE_ID: "6"
+			},
+      api: {
+        search: "/en/api/expert/?format=json",
+      },
+			models: {},
+			views: {},
+			strings: {},
+			templates: {}
+		}
+    var translations = {
+      "expert-from": "From",
+      "expert-to": "To",
+      "expert-composer": "Composer",
+      "expert-work": "Work",
+      "expert-distribution": "Series / Subscription / Festival",
+      "expert-performers": "Performer",
+      "expert-promoter": "Promoter",
+      "expert-venue": "Venue",
+      "expert-day": "day",
+      "expert-month": "month",
+      "expert-year": "year",
+      "expert-period": "Date range",
+      "expert-reset": "Delete all filters",
+      "expert-canceled": "Also show cancelled events",
+      "expert-error-date": "Please check the date",
+      "expert-loading-text": "The advanced search is loading…",
+      "expert-results": "Search Results",
+      "expert-result": "Search Result",
+      "expert-event-past": "Past Event"
+    }
+	</script>
+
+
+	<script id="cart-template" type="text/html">
+		<% if(cart_items_count){ %>
+		<span class="icon icon-basket has-item">Shopping Basket</span>
+		<span class="items-count"><%- cart_items_count %></span>
+		<% if(typeof remaining !== 'undefined'){ %><span class="additional-info"><%- remaining %> Min</span><% } %>
+		<% }else{ %>
+		<span class="icon icon-basket">Shopping Basket</span>
+		<% } %>
+	</script>
+
+
+	<script id="user-template" type="text/html">
+		<!-- profile1_link_begin -->
+		<a href="" class="link-with-icon" title="Customer Account">
+			<span class="icon icon-login">Customer Account</span>
+			<!-- if logged in -->
+			<% if(typeof is_authenticated !== 'undefined' && is_authenticated){ %><span class="additional-info"><%- display_name %></span><% } %>
+		</a>
+		<!-- profile1_link_end -->
+		<% if(typeof is_authenticated !== 'undefined' && is_authenticated){ %>
+		<div class="overlay-head-elements overlay-login">
+			<div class="table">
+				<div class="table-row">
+					<div class="table-cell">
+						<p class="username"><%- display_name %></p>
+						<p><b>Kundennummer:</b> <%- customer_number %></p>
+						<p><b>E-Mail:</b> <%- email %></p>
+					</div>
+					<div class="table-cell">
+						<!-- profile2_link_begin -->
+						<a href="">Customer Account</a>
+						<!-- profile2_link_end -->
+						<br>
+						<!-- logout_link_begin -->
+						<a href="">Logout</a>
+						<!-- logout_link_end -->
+					</div>
+				</div>
+			</div>
+			<a href="#" class="icon icon-close" title="Close">Close</a>
+		</div>
+		<% } %>
+	</script>
+
+	
+
+	
+
+	
+	
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Browse the Elbphilharmonie and Laeiszhalle programme now and book tickets online." />
+<meta property="og:description" content="Discover all the concerts at the Elbphilharmonie and Laeiszhalle and book tickets now." />
+
+	<meta property="og:image" content="https://www.elbphilharmonie.dehttps://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/95/e0/95e0cace-865c-4454-b223-c41be47cd034/170404_new_york_philharmonic_foto_chris_lee2.jpg__1920x1920_q85_subject_location-990%2C876_subsampling-2_upscale.jpg" />
+	<meta property="og:image:secure_url" content="https://www.elbphilharmonie.dehttps://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/95/e0/95e0cace-865c-4454-b223-c41be47cd034/170404_new_york_philharmonic_foto_chris_lee2.jpg__1920x1920_q85_subject_location-990%2C876_subsampling-2_upscale.jpg" />
+
+
+
+</head>
+
+<body class="no-js ">
+	
+
+	
+		<!-- Google Tag Manager -->
+<div id="gtm" data-cookie-consent="googleTagManager">
+  <!--if-consent
+      <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MH9K989"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MH9K989');</script>
+    endif-->
+</div>
+<!-- End Google Tag Manager -->
+	
+
+	
+	
+
+	
+
+	<div class="page-container " >
+
+		
+
+
+
+
+
+
+
+
+<header class="header">
+	
+	<a href="/en/" title="Elbphilharmonie Laeiszhalle Hamburg" class="header__logo">
+		<svg version="1.1" id="Group_2199" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 56 67.9" enable-background="new 0 0 56 67.9" xml:space="preserve" class="header__logo-svg">
+<rect class="logo-line-11" x="43.5" y="39.6" width="12.5" height="3.4"/>
+<rect class="logo-line-10" x="43.5" y="56.6" width="12.5" height="1.1"/>
+<rect class="logo-line-9" x="43.5" y="67.6" width="12.5" height="0.3"/>
+<rect class="logo-line-8" x="29" y="46.4" width="12.5" height="1.1"/>
+<rect class="logo-line-7" x="29" y="53.4" width="12.5" height="0.6"/>
+<rect class="logo-line-6" x="14.5" y="39.6" width="12.5" height="3.4"/>
+<rect class="logo-line-5" x="14.5" y="46.4" width="12.5" height="2.3"/>
+<rect class="logo-line-4" x="14.5" y="56.6" width="12.5" height="1.1"/>
+<rect class="logo-line-3" y="39.6" width="12.5" height="1.7"/>
+<rect class="logo-line-2" y="46.4" width="12.5" height="1.1"/>
+<rect class="logo-line-1" y="53.4" width="12.5" height="0.6"/>
+<rect class="logo-bottom" y="23.1" width="56" height="10.7"/>
+<path class="logo-top" d="M56,0v24.1H0V13.9c5.1,2.2,11,0.8,14.7-3.4c7,6.3,18.5,2.8,24.1-7.3C49.2,9.8,55.9,0,56,0z"/>
+<!-- <path class="logo-icon" d="M38.9,3.2c-5.6,10.1-17.1,13.6-24.1,7.3c-3.7,4.2-9.6,5.6-14.7,3.4l0,19.9h56V0C56,0,49.3,9.8,38.9,3.2"/> -->
+</svg>
+
+	</a>
+
+	<button type="button" class="header__burger" aria-expanded="false" title="Menu">
+		<i class="header__burger-line"></i>
+		<i class="header__burger-line"></i>
+		<i class="header__burger-line"></i>
+	</button>
+
+	<nav aria-label="Main menu" class="header__navigation" aria-hidden="true">
+
+		<ul class="header__menu">
+			<li class="header__menu-indicator"></li>
+			
+				<li class="header__menu-item header__menu-item--active" data-name="What’s On">
+					<a href="/en/whats-on/CANCELLED/" class=" active">What’s On</a>
+				</li>
+			
+				<li class="header__menu-item " data-name="Visit">
+					<a href="/en/visit" class="">Visit</a>
+				</li>
+			
+				<li class="header__menu-item " data-name="Mediatheque">
+					<a href="/en/mediatheque" class="">Mediatheque</a>
+				</li>
+			
+				<li class="header__menu-item " data-name="The Halls">
+					<a href="/en/the-halls" class="">The Halls</a>
+				</li>
+			
+				<li class="header__menu-item " data-name="Children &amp; Families">
+					<a href="/en/children-and-families" class="">Children &amp; Families</a>
+				</li>
+			
+				<li class="header__menu-item " data-name="Support">
+					<a href="/en/support" class="">Support</a>
+				</li>
+			
+			<!-- <li class="header__menu-item"><a href="#" title="Startseite">Startseite</a></li> -->
+			<!-- <li class="header__menu-item header__menu-item--active"><a href="#" title="Programm">Programm</a></li> -->
+		</ul>
+
+		<aside class="header__above">
+			
+				
+					<div class="header__search js-search">
+						<button class="header__search-button bold"><label for="search-input" class="header__search-text">Search</label> <i class="icon-search"></i></button>
+						<form id="search-form" action="/en/search/" method="get" class="header__search-form js-search-form">
+							<div class="header__search-wrapper">
+								<i class="icon-search header__search-icon"></i>
+								<input type="search" id="search-input" placeholder="Search" name="q" autocomplete="off" class="header__search-input js-autocomplete-input">
+								<!-- <button type="submit" id="search-submit" value="Search" title=""></button> -->
+							</div>
+						</form>
+						<nav class="header__autocomplete">
+							<div class="header__autocomplete-loading loading-animation"></div>
+              <div class="header__autocomplete-noresult">
+                <h4>Your search yielded no results.</h4>
+                <p class="din">Please try again with a different search term.</p>
+              </div>
+							<ul class="header__autocomplete-list"></ul>
+						</nav>
+					</div>
+				
+			
+
+			<ul class="header__above-items">
+				<li class="header__above-item header__above-item--merklist" data-name="Saved events">
+					<a href="#" title="Saved events" class="" id="merklist">
+						<i class="icon-merken"></i>
+						<span class="header__above-count header__merklist-count"></span>
+					</a>
+				</li>
+				<li class="header__above-item" data-name="Customer Account">
+					<a href="#" class="header__above-account--link" title="Customer Account">
+						<i class="icon-account"></i>
+						<span class="header__above-text header__above-account--name"></span>
+					</a>
+				</li>
+		        <li class="header__above-item" data-name="View Shopping Basket">
+		        	<a href="#" class="header__above-basket" title="View Shopping Basket">
+						<i class="icon-basket"></i>
+		            	<span class="header__above-count header__basket-count"></span>
+		          </a>
+		        </li>
+			</ul>
+
+			<div class="header__languages">
+				
+				
+				<a href="#" class="header__languages-current" aria-expanded="false">En</a>
+				<ul class="header__languages-options" aria-hidden="true">
+					
+						<li class="header__languages-option">
+							<a href="/de/programm/"
+                 class=" header__languages-link--DE header__languages-link"
+                 lang="de" 
+                 hreflang="de"
+               >
+                Deutsch
+              </a>
+						</li>
+					
+						<li class="header__languages-option">
+							<a href="/en/whats-on/"
+                 class="header__languages-link--active  header__languages-link--EN header__languages-link"
+                 lang="en" 
+                 hreflang="en"
+               >
+                English
+              </a>
+						</li>
+					
+				</ul>
+			</div>
+		</aside>
+
+		<aside class="header__merklist grid-x align-center">
+			<button title="Close saved events" class="header__merklist-close" type="button"></button>
+			<div class="header__merklist-wrapper cell small-10 medium-7 large-5" data-merkcontent="loggedin" style="display: none">
+				<h2 class="header__merklist-title line-center">Your saved events list is empty</h2>
+				<p class="header__merklist-text"> You can save events to your Saved Events list with the <strong>Save for later</strong> <i class="icon-merken-star"></i> function.</p>
+				<div class="header__merklist-button">
+					<a href="/en/whats-on/" class="link link-default">View programme</a>
+				</div>
+			</div>
+
+			<div class="header__merklist-wrapper cell small-10 medium-7 large-5" data-merkcontent="loggedout" >
+				<h2 class="header__merklist-title line-center">Saved events</h2>
+				<p class="header__merklist-text">You have to log in to view your saved events. If you do not have an Elbphilharmonie customer account, registering is quick and easy.</p>
+				<div class="header__merklist-button">
+					<a href="#" class="button link link-default header__merklist-account">Log in or register</a>
+				</div>
+			</div>
+
+			<div class="header__merklist-container cell large-10 xlarge-12 grid-container" data-merkcontent="list" style="display: none">
+        <div class="grid-x align-center header__merklist-header">
+          <div class="cell large-8">
+            <h2 class="header__merklist-title line-center">Saved events</h2>
+            <button type="button" class="header__merklist-clear" data-clear="all">Clear saved events <i class="icon-trash-merklist"></i></button>
+            <button type="button" class="header__merklist-clear" data-clear="alert">Deactivate all ticket alerts <i class="icon-trash-merklist"></i></button>
+          </div>
+        </div>
+        <ul class="event-list merklist-list">
+        </ul>
+        <div class="header__merklist-loading">
+          <div class="loading-animation"></div>
+        </div>
+        <div class="header__merklist-footer grid-x align-center">
+          <div class="cell large-8">
+            <a href="/en/whats-on/" title="Go to what’s on" class="button hollow link link-default">Go to what’s on</a>
+          </div>
+        </div>
+			</div>
+		</aside>
+
+	</nav>
+</header>
+
+
+		<main class="content-container">
+			
+	<div class="grid-container">
+		<div class="grid-x grid-margin-x align-center">
+			<div class="cell">
+				
+
+<header class="grid-container page-header less-space">
+	<div class="grid-x grid-margin-x align-center">
+		<div class="cell medium-10">
+			<h1>What’s On</h1>
+		</div>
+	</div>
+</header>
+
+<aside>
+  <nav class="grid-container section-container anchor-nav event-tabs">
+    <ul class="anchor-nav__list">
+      <li class="anchor-nav__item">
+        <a href="/en/whats-on/" class="anchor-nav__link active" data-name="Events" aria-current="page">
+          Events
+        </a>
+      </li>
+      <li class="anchor-nav__item">
+        <a href="/en/subscriptions" class="anchor-nav__link" data-name="Subscriptions" >
+          Subscriptions
+        </a>
+      </li>
+      <li class="anchor-nav__item">
+        <a href="/en/season" class="anchor-nav__link" data-name="Season" >
+          Season
+        </a>
+      </li>
+      <li class="anchor-nav__item">
+        <a href="/en/participate" class="anchor-nav__link" data-name="Participate" >
+          Participate
+        </a>
+      </li>
+      <li class="anchor-nav__indicator"></li>
+    </ul>
+  </nav>
+</aside>
+
+				
+
+				<section id="program-section" class="booking-list-page">
+
+					<aside class="filter" data-has-filter="0" data-has-date="0">
+						<div class="filter__fakeblock"></div>
+						<div class="filter__group">
+							<span class="filter__intro">Filter list:</span>
+							<div class="filter__content">
+								<nav class="filter__navigation">
+									<button type="button"
+											class="filter__navigation-button filter__navigation-button--calendar"
+                      data-button-action="calendar"
+                      data-class="calendar--open"
+                      data-action="toggle"
+                      title="Date"
+                      aria-controls="calendar-filter"
+                      aria-expanded="false"
+                      >
+										<i class="icon-calendar" data-name="Date"></i>
+                      
+                        <span class="filter__navigation-text">Date</span>
+                      
+										<i class="icon-chevron-down" data-name="Date"></i>
+									</button>
+									<button type="button"
+											class="filter__navigation-button filter__navigation-button--filter"
+											data-button-action="filter__wrapper" data-class="filter__wrapper--open"
+                      aria-controls="filter-nav"
+                      aria-expanded="false"
+											data-action="add" title="Filter list">
+										<i class="icon-filter" data-name="Filter list"></i>
+										
+											<span class="filter__navigation-text">Filter list</span>
+										
+									</button>
+								</nav>
+								<ul class="filter__checkboxes">
+									
+
+<li class="filter__option filter__option--checkbox">
+    <label for="tickets-opener-1" class=" ">
+      <input id="tickets-opener-1" class="filter__checkbox" type="checkbox" data-link="/en/whats-on/TICKETS/" data-name="Tickets available" >
+      <span class="filter__option-text">Tickets available</span>
+    </label>
+  </li>
+  <li class="filter__option filter__option--checkbox">
+    <label for="only-elphilharmonie-1" class=" ">
+      <input id="only-elphilharmonie-1" class="filter__checkbox" type="checkbox" data-link="/en/whats-on/EPHH/" data-name="Only Elbphilharmonie" >
+      <span class="filter__option-text">Only Elbphilharmonie</span>
+    </label>
+  </li>
+  <li class="filter__option filter__option--checkbox">
+    <label for="tickets-canceled-1" class=" ">
+      <input id="tickets-canceled-1" class="filter__checkbox" type="checkbox" data-link="/en/whats-on/CANCELLED/" data-name="Add cancellations" >
+      <span class="filter__option-text">Add cancellations</span>
+    </label>
+  </li>
+
+								</ul>
+							</div>
+              <div id="calendar-filter" aria-hidden="true" class="calendar "
+								 data-last-date="July 31, 2024, 11:59 p.m." data-day="27"
+								 data-month="8" data-year="2022"
+								 data-first_event_date="2021-08-01T00:00:00+02:00"
+								 data-last_event_date="2024-07-31T23:59:00+02:00"
+								 data-urlpattern="/en/whats-on/11-22-3333/">
+								
+<header class="calendar__header">
+  <button title="Close watchlist" class="calendar__close" data-button-action="calendar" data-class="calendar--open" data-action="remove" ></button>
+  <h2 class="no-line calendar__title">Date</h2>
+</header>
+<div class="calendar__wrapper">
+	<div class="calendar__headline">
+
+    <a href="" class="calendar__prev" title="previous month"><i class="icon-arrow-left"></i></a>
+    <span class="calendar__current">
+      <span class="calendar__current-month bold">August</span>
+      <span class="calendar__current-year bold">2022</span>
+    </span>
+    <a id='calendar-next-month' href="" class="calendar__next" title="next month"><i class="icon-arrow-right"></i></a>
+	</div>
+  <div class="calendar__content">
+    <table class="calendar__table">
+      <thead class="calendar__thead">
+        <tr>
+          <th>
+            <span>MO</span>
+          </th>
+          <th>
+            <span>TU</span>
+          </th>
+          <th>
+            <span>WE</span>
+          </th>
+          <th>
+            <span>TH</span>
+          </th>
+          <th>
+            <span>FR</span>
+          </th>
+          <th>
+            <span>SA</span>
+          </th>
+          <th>
+            <span>SO</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="calendar__tbody">
+        
+          <tr>
+            
+              <td>
+                
+                <a href="/en/whats-on/01-08-2022/" class="past ">01</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/02-08-2022/" class="past ">02</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/03-08-2022/" class="past ">03</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/04-08-2022/" class="past ">04</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/05-08-2022/" class="past ">05</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/06-08-2022/" class="past ">06</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/07-08-2022/" class="past ">07</a>
+                
+              </td>
+              
+            
+          </tr>
+        
+          <tr>
+            
+              <td>
+                
+                <a href="/en/whats-on/08-08-2022/" class="past ">08</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/09-08-2022/" class="past ">09</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/10-08-2022/" class="past ">10</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/11-08-2022/" class="past ">11</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/12-08-2022/" class="past ">12</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/13-08-2022/" class="past ">13</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/14-08-2022/" class="past ">14</a>
+                
+              </td>
+              
+            
+          </tr>
+        
+          <tr>
+            
+              <td>
+                
+                <a href="/en/whats-on/15-08-2022/" class="past ">15</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/16-08-2022/" class="past ">16</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/17-08-2022/" class="past ">17</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/18-08-2022/" class="past ">18</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/19-08-2022/" class="past ">19</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/20-08-2022/" class="past ">20</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/21-08-2022/" class="past ">21</a>
+                
+              </td>
+              
+            
+          </tr>
+        
+          <tr>
+            
+              <td>
+                
+                <a href="/en/whats-on/22-08-2022/" class="past ">22</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/23-08-2022/" class="past ">23</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/24-08-2022/" class="past ">24</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/25-08-2022/" class="past ">25</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/26-08-2022/" class="past ">26</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/27-08-2022/" class="today current-day ">27</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/28-08-2022/" class="">28</a>
+                
+              </td>
+              
+            
+          </tr>
+        
+          <tr>
+            
+              <td>
+                
+                <a href="/en/whats-on/29-08-2022/" class="">29</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/30-08-2022/" class="">30</a>
+                
+              </td>
+              
+            
+              <td>
+                
+                <a href="/en/whats-on/31-08-2022/" class="">31</a>
+                
+              </td>
+              
+            
+              <td>
+                
+              </td>
+              
+            
+              <td>
+                
+              </td>
+              
+            
+              <td>
+                
+              </td>
+              
+            
+              <td>
+                
+              </td>
+              
+            
+          </tr>
+        
+      </tbody>
+      <tbody class="calendar__unavailable" >
+        <tr >
+          <td>
+            <a href="/en/archive" class="link-default bold">View older events in the Concert Archive</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<footer class="calendar__footer">
+  <a href="/en/whats-on/11-22-3333/" class="link link-default calendar__today" title="Show concerts from today">Show concerts from today</a>
+</footer>
+<!-- <script type="text/javascript"> -->
+
+<!-- 	if(!(typeof $ === 'undefined')) { -->
+<!-- 		var last_event_date = $('#calendar-filter').attr('data-last-date'); -->
+<!-- 		// check if user reaches to the month of last event in calendar -->
+<!-- 		if ( !last_event_date || last_event_date == '' ) -->
+<!-- 			$('#calendar-next-month').hide(); -->
+<!-- 	} -->
+<!-- </script> -->
+
+							</div>
+							<nav class="filter__wrapper" id="filter-nav" aria-hidden="false">
+                <i class="filter__wrapper-blend"
+                    data-button-action="filter__wrapper"
+                    data-class="filter__wrapper--open"
+                    data-action="remove"
+                ></i>
+								<div class="filter__scroller">
+									<header class="filter__header">
+										<button class="filter__button-back bold"
+												data-button-action="filter__wrapper"
+												data-class="filter__wrapper--open"
+												data-action="remove"
+												type="button"
+												title="Events">
+											<i class="icon-arrow-left"></i>
+											Events
+										</button>
+										
+									</header>
+									<ul class="filter__options">
+										<li class="filter__option filter__option--title">
+											<h2 class="no-line filter__title">Filter</h2>
+										</li>
+										<li class="filter__option" data-name="Venue">
+											<input id="location-opener" type="checkbox"
+												   class="filter__option-checkbox"/>
+											<label for="location-opener"
+                             tabindex="-1"
+                             aria-expanded="false"
+                             aria-controls="filter-venues"
+												   class="filter__option-label">Venue<i class="icon-chevron-down"></i></label>
+											<ul class="filter__items" aria-hidden="true" id="filter-venues">
+  
+    <li class="filter__item " >
+      <a data-name="Elbphilharmonie Hamburg" href="EPHH/" class="filter__link ">Elbphilharmonie Hamburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="Großer Saal" href="EPGS/" class="filter__link ">Großer Saal</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="Kleiner Saal" href="EPKS/" class="filter__link ">Kleiner Saal</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Laeiszhalle Hamburg" href="LHHH/" class="filter__link ">Laeiszhalle Hamburg</a>
+      
+        <hr>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Erlenbusch" href="ERBU/" class="filter__link ">Erlenbusch</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Albertinenhaus" href="AHST/" class="filter__link ">Albertinenhaus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Körber Haus" href="KÖHA/" class="filter__link ">Körber Haus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Begegnungsstätte Bergstedt" href="BSBE/" class="filter__link ">Begegnungsstätte Bergstedt</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Bunker Feldstraße" href="BUFE/" class="filter__link ">Bunker Feldstraße</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Bürgerhaus Bornheide" href="BHBO/" class="filter__link ">Bürgerhaus Bornheide</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Bürgerhaus Wilhelmsburg" href="BHWI/" class="filter__link ">Bürgerhaus Wilhelmsburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Chilehaus" href="CHIL/" class="filter__link ">Chilehaus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Das Rauhe Haus" href="DRHA/" class="filter__link ">Das Rauhe Haus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Deichtorhallen" href="DEIC/" class="filter__link ">Deichtorhallen</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Deutsches Schauspielhaus" href="DESH/" class="filter__link ">Deutsches Schauspielhaus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Eidelstedter Bürgerhaus" href="EIBH/" class="filter__link ">Eidelstedter Bürgerhaus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="ella Kulturhaus Langenhorn" href="ELLA/" class="filter__link ">ella Kulturhaus Langenhorn</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Fabrik" href="FABR/" class="filter__link ">Fabrik</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Freizeitzentrum Schnelsen" href="FRZS/" class="filter__link ">Freizeitzentrum Schnelsen</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Fundus Theater" href="FUTH/" class="filter__link ">Fundus Theater</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Halle 424" href="H424/" class="filter__link ">Halle 424</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hartwig-Hesse-Quartier" href="HAHE/" class="filter__link ">Hartwig-Hesse-Quartier</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hauptkirche St. Jacobi Hamburg" href="HSTJ/" class="filter__link ">Hauptkirche St. Jacobi Hamburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hauptkirche St. Katharinen" href="STKA/" class="filter__link ">Hauptkirche St. Katharinen</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hauptkirche St. Michaelis" href="STMI/" class="filter__link ">Hauptkirche St. Michaelis</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="HausDrei Stadtteilkulturzentrum" href="HADR/" class="filter__link ">HausDrei Stadtteilkulturzentrum</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Haus im Park" href="HAIP/" class="filter__link ">Haus im Park</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hochschule für Musik und Theater Hamburg" href="HFMT/" class="filter__link ">Hochschule für Musik und Theater Hamburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Honigfabrik" href="HOFA/" class="filter__link ">Honigfabrik</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="IG Lentersweg Stadteilkultur" href="IGLE/" class="filter__link ">IG Lentersweg Stadteilkultur</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Planten un Blomen" href="PLBL/" class="filter__link ">Planten un Blomen</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kampnagel" href="KAMP/" class="filter__link ">Kampnagel</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kinderkulturhaus Lohbrügge" href="KIKU/" class="filter__link ">Kinderkulturhaus Lohbrügge</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kultur Palast Hamburg" href="KUPA/" class="filter__link ">Kultur Palast Hamburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kulturhaus Süderelbe" href="KUSE/" class="filter__link ">Kulturhaus Süderelbe</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kulturkirche Altona" href="KUKI/" class="filter__link ">Kulturkirche Altona</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kulturladen St.Georg" href="KLSG/" class="filter__link ">Kulturladen St.Georg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kulturpunkt im Barmbek Basch" href="BASH/" class="filter__link ">Kulturpunkt im Barmbek Basch</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kulturwerkstatt Harburg" href="KWHA/" class="filter__link ">Kulturwerkstatt Harburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Kultura Kulturzentrum Allermöhe" href="KUZA/" class="filter__link ">Kultura Kulturzentrum Allermöhe</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Leben mit Behinderung Hamburg" href="LMBH/" class="filter__link ">Leben mit Behinderung Hamburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="M.Bassy" href="MBAS/" class="filter__link ">M.Bassy</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Mojo Club" href="MOJO/" class="filter__link ">Mojo Club</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Mozartsäle" href="MOZA/" class="filter__link ">Mozartsäle</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Oberhafen-Kantine" href="OBHK/" class="filter__link ">Oberhafen-Kantine</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Rolf-Liebermann-Studio" href="RLSN/" class="filter__link ">Rolf-Liebermann-Studio</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Sasel-Haus" href="SAHA/" class="filter__link ">Sasel-Haus</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Service Wohnen für Senioren" href="SWFS/" class="filter__link ">Service Wohnen für Senioren</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Seniorenzentrum Nordlandweg" href="SZNO/" class="filter__link ">Seniorenzentrum Nordlandweg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Speicherstadtmuseum" href="SSTM/" class="filter__link ">Speicherstadtmuseum</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="St. Johannis-Harvestehude" href="STJH/" class="filter__link ">St. Johannis-Harvestehude</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="St. Pauli Theater" href="STPT/" class="filter__link ">St. Pauli Theater</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Staatsoper Hamburg" href="OPER/" class="filter__link ">Staatsoper Hamburg</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Vorplatz der Elbphilharmonie" href="VPEP/" class="filter__link ">Vorplatz der Elbphilharmonie</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Westibül" href="WEST/" class="filter__link ">Westibül</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Zeise Kinos" href="ZEKI/" class="filter__link ">Zeise Kinos</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Zinnschmelze" href="ZINN/" class="filter__link ">Zinnschmelze</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hamburg" href="HHAH/" class="filter__link ">Hamburg</a>
+      
+      
+    </li>
+  
+</ul>
+
+										</li>
+										<li class="filter__option" data-name="Genres">
+											<input id="genre-opener" type="checkbox" class="filter__option-checkbox"/>
+											<label for="genre-opener"
+                             tabindex="-1"
+                             aria-expanded="false"
+                             aria-controls="filter-genres"
+												   class="filter__option-label">Genres<i class="icon-chevron-down"></i></label>
+											<ul class="filter__items" aria-hidden="true" id="filter-genres">
+  
+    <li class="filter__item " >
+      <a data-name="Orchestra Concerts" href="OR/" class="filter__link ">Orchestra Concerts</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Ensemble Concerts" href="ENS/" class="filter__link ">Ensemble Concerts</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Chamber Music &amp; Recitals" href="KM/" class="filter__link ">Chamber Music &amp; Recitals</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Piano Recitals" href="KLAV/" class="filter__link ">Piano Recitals</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Organ Concerts" href="ORG/" class="filter__link ">Organ Concerts</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Opera, Choir &amp; Oratorio" href="OC/" class="filter__link ">Opera, Choir &amp; Oratorio</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Aria &amp; Song Recitals" href="VM/" class="filter__link ">Aria &amp; Song Recitals</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Early Music" href="AM/" class="filter__link ">Early Music</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Contemporary Music" href="NM/" class="filter__link ">Contemporary Music</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Jazz" href="JA/" class="filter__link ">Jazz</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="World Music" href="WELT/" class="filter__link ">World Music</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Rock, Pop, Singer-Songwriter" href="PRS/" class="filter__link ">Rock, Pop, Singer-Songwriter</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Electronic Music" href="ELEK/" class="filter__link ">Electronic Music</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Shows &amp; Entertainment" href="SHOW/" class="filter__link ">Shows &amp; Entertainment</a>
+      
+      
+    </li>
+  
+</ul>
+
+										</li>
+										<li class="filter__option" data-name="Suitable for">
+											<input id="audience-opener" type="checkbox"
+												   class="filter__option-checkbox"/>
+											<label for="audience-opener"
+                             tabindex="-1"
+                             aria-expanded="false"
+                             aria-controls="filter-recommendations"
+												   class="filter__option-label">Suitable for<i class="icon-chevron-down"></i></label>
+											<ul class="filter__items" aria-hidden="true" id="filter-recommendations">
+  
+    <li class="filter__item " >
+      <a data-name="Families" href="FAM/" class="filter__link ">Families</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Ages 0–1" href="0JA/" class="filter__link ">Ages 0–1</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Ages 1–3" href="1JA/" class="filter__link ">Ages 1–3</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Ages 3–5" href="3JA/" class="filter__link ">Ages 3–5</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Ages 6+" href="6JA/" class="filter__link ">Ages 6+</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Ages 8+" href="8JA/" class="filter__link ">Ages 8+</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Teenagers" href="TEE/" class="filter__link ">Teenagers</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Newcomers" href="EIN/" class="filter__link ">Newcomers</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Experienced Listeners" href="FOR/" class="filter__link ">Experienced Listeners</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Connoisseurs" href="EXN/" class="filter__link ">Connoisseurs</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Adventurers" href="EXF/" class="filter__link ">Adventurers</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Early Birds" href="FRUE/" class="filter__link ">Early Birds</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Night Owls" href="NSW/" class="filter__link ">Night Owls</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Globetrotters" href="WEB/" class="filter__link ">Globetrotters</a>
+      
+      
+    </li>
+  
+</ul>
+
+										</li>
+										<li class="filter__option" data-name="Type of event">
+											<input id="type-opener" type="checkbox"
+												   class="filter__option-checkbox"/>
+											<label for="type-opener"
+                             tabindex="-1"
+                             aria-expanded="false"
+                             aria-controls="filter-kinds"
+												   class="filter__option-label">Type of event<i class="icon-chevron-down"></i></label>
+											<ul class="filter__items" aria-hidden="true" id="filter-kinds">
+  
+    <li class="filter__item " >
+      <a data-name="Concert" href="KON/" class="filter__link ">Concert</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Lunchtime / Teatime Concert" href="LTT/" class="filter__link ">Lunchtime / Teatime Concert</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Film &amp; Film Music" href="FILM/" class="filter__link ">Film &amp; Film Music</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Reading" href="LES/" class="filter__link ">Reading</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Lecture / Presentation" href="VOR/" class="filter__link ">Lecture / Presentation</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Workshop" href="INST/" class="filter__link ">Workshop</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Elbphilharmonie+" href="EPPLUS/" class="filter__link ">Elbphilharmonie+</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Us in the City" href="WIST/" class="filter__link ">Us in the City</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Concert with Pre-Concert Talk" href="KOEI/" class="filter__link ">Concert with Pre-Concert Talk</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Meet the Artist" href="KGR/" class="filter__link ">Meet the Artist</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="HamburgMusik Event" href="EIV/" class="filter__link ">HamburgMusik Event</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="NDR Event" href="NDR/" class="filter__link ">NDR Event</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="NDR Elbphilharmonie Orchestra" href="NDR_EO/" class="filter__link ">NDR Elbphilharmonie Orchestra</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="NDR Bigband" href="NDR_BB/" class="filter__link ">NDR Bigband</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="NDR Vocal Ensemble (NDR Chor)" href="NDR_CH/" class="filter__link ">NDR Vocal Ensemble (NDR Chor)</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="NDR Jazz" href="NDR_JA/" class="filter__link ">NDR Jazz</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="NDR das neue werk" href="NDR_NW/" class="filter__link ">NDR das neue werk</a>
+      
+      
+    </li>
+  
+    <li class="filter__item filter__item--subelement" >
+      <a data-name="NDR Education (Discover Music!)" href="NDR_ED/" class="filter__link ">NDR Education (Discover Music!)</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Symphoniker Hamburg Event" href="SYMP/" class="filter__link ">Symphoniker Hamburg Event</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Veranstaltungen des Ensemble Resonanz" href="ER/" class="filter__link ">Veranstaltungen des Ensemble Resonanz</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Hamburg Philharmonic State Orchestra Event" href="PHIL/" class="filter__link ">Hamburg Philharmonic State Orchestra Event</a>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <a data-name="Konzertdirektion Dr. Rudolf Goette Event" href="GOET/" class="filter__link ">Konzertdirektion Dr. Rudolf Goette Event</a>
+      
+      
+    </li>
+  
+</ul>
+
+										</li>
+										
+
+<li class="filter__option filter__option--checkbox">
+    <label for="tickets-opener-2" class=" ">
+      <input id="tickets-opener-2" class="filter__checkbox" type="checkbox" data-link="/en/whats-on/TICKETS/" data-name="Tickets available" >
+      <span class="filter__option-text">Tickets available</span>
+    </label>
+  </li>
+  <li class="filter__option filter__option--checkbox">
+    <label for="only-elphilharmonie-2" class=" ">
+      <input id="only-elphilharmonie-2" class="filter__checkbox" type="checkbox" data-link="/en/whats-on/EPHH/" data-name="Only Elbphilharmonie" >
+      <span class="filter__option-text">Only Elbphilharmonie</span>
+    </label>
+  </li>
+  <li class="filter__option filter__option--checkbox">
+    <label for="tickets-canceled-2" class=" ">
+      <input id="tickets-canceled-2" class="filter__checkbox" type="checkbox" data-link="/en/whats-on/CANCELLED/" data-name="Add cancellations" >
+      <span class="filter__option-text">Add cancellations</span>
+    </label>
+  </li>
+
+									</ul>
+									<footer class="filter__footer filter__footer--off">
+                  
+									</footer>
+								</div>
+							</nav>
+						</div>
+					</aside>
+
+					
+
+					<div class="program-section__loading loading-animation" style="display: none; opacity: 0;"></div>
+
+					
+						<div class="grid-x grid-margin-x align-center">
+							<div class="cell large-10 xlarge-12">
+								<ul class="event-list" id="event-list">
+									
+
+
+
+
+		<li id="event_id_000000e9000b0d50" data-event-id="7261" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-27T20:00:00+02:00"><strong class="date nobreak">Sat, 27 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/brahms-ein-deutsches-requiem/17835" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/f1/c9/f1c9dfb6-aee2-455a-8788-4576bb742e24/nagano_kent_hh_staatsorchester_foto_felix_broede_2.jpg__219x164_q85_crop_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/f1/c9/f1c9dfb6-aee2-455a-8788-4576bb742e24/nagano_kent_hh_staatsorchester_foto_felix_broede_2.jpg__392x294_q85_crop_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/f1/c9/f1c9dfb6-aee2-455a-8788-4576bb742e24/nagano_kent_hh_staatsorchester_foto_felix_broede_2.jpg__442x328_q85_crop_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/f1/c9/f1c9dfb6-aee2-455a-8788-4576bb742e24/nagano_kent_hh_staatsorchester_foto_felix_broede_2.jpg__219x164_q85_crop_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/f1/c9/f1c9dfb6-aee2-455a-8788-4576bb742e24/nagano_kent_hh_staatsorchester_foto_felix_broede_2.jpg__392x294_q85_crop_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/f1/c9/f1c9dfb6-aee2-455a-8788-4576bb742e24/nagano_kent_hh_staatsorchester_foto_felix_broede_2.jpg__442x328_q85_crop_subsampling-2_upscale.jpg" alt="Kent Nagano" title="Kent Nagano © Felix Brode"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/brahms-ein-deutsches-requiem/17835">
+								Brahms: Ein deutsches Requiem
+							</a></p><p class="event-subtitle">Hamburg Philharmonic State Orchestra / Kent Nagano – Elbphilharmonie Summer</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000b0d50" 
+                       data-name="Sat, 27 Aug 2022 - Brahms: Ein deutsches Requiem"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/brahms-ein-deutsches-requiem/17835"
+	   data-name="Brahms: Ein deutsches Requiem - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>15.40</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/brahms-ein-deutsches-requiem/17835"
+	   data-name="Brahms: Ein deutsches Requiem - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>15.40</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000f61d5" data-event-id="" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-27T20:00:00+02:00"><strong class="date nobreak">Sat, 27 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/anna-depenbusch-echtzeit-gala-mit-band-und-gasten/16359" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__219x164_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__392x294_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__442x328_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__219x164_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__392x294_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__442x328_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg" alt="Anna Depenbusch" title="Anna Depenbusch © Steven Haberland"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/anna-depenbusch-echtzeit-gala-mit-band-und-gasten/16359">
+								Anna Depenbusch – Echtzeit Gala mit Band und Gästen
+							</a></p><p class="event-subtitle">Replaces concerts from 3/4 April 2021</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000f61d5" 
+                       data-name="Sat, 27 Aug 2022 - Anna Depenbusch – Echtzeit Gala mit Band und Gästen"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
+						Sold out
+					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000f23bc" data-event-id="15315024" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-27T20:00:00+02:00"><strong class="date nobreak">Sat, 27 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/neue-philharmonie-hamburg/18827" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c2/66/c266401d-45a6-4304-b6d6-917d8adc3ebe/neue_philharmonie_hamburg_orchesterbild_c_neue_philharmonie_hamburg_-_tigran_mikaelyan.jpg__219x164_q85_crop_subject_location-933%2C790_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c2/66/c266401d-45a6-4304-b6d6-917d8adc3ebe/neue_philharmonie_hamburg_orchesterbild_c_neue_philharmonie_hamburg_-_tigran_mikaelyan.jpg__392x294_q85_crop_subject_location-933%2C790_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c2/66/c266401d-45a6-4304-b6d6-917d8adc3ebe/neue_philharmonie_hamburg_orchesterbild_c_neue_philharmonie_hamburg_-_tigran_mikaelyan.jpg__442x328_q85_crop_subject_location-933%2C790_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c2/66/c266401d-45a6-4304-b6d6-917d8adc3ebe/neue_philharmonie_hamburg_orchesterbild_c_neue_philharmonie_hamburg_-_tigran_mikaelyan.jpg__219x164_q85_crop_subject_location-933%2C790_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c2/66/c266401d-45a6-4304-b6d6-917d8adc3ebe/neue_philharmonie_hamburg_orchesterbild_c_neue_philharmonie_hamburg_-_tigran_mikaelyan.jpg__392x294_q85_crop_subject_location-933%2C790_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c2/66/c266401d-45a6-4304-b6d6-917d8adc3ebe/neue_philharmonie_hamburg_orchesterbild_c_neue_philharmonie_hamburg_-_tigran_mikaelyan.jpg__442x328_q85_crop_subject_location-933%2C790_subsampling-2_upscale.jpg" alt="Neue Philharmonie Hamburg" title="Neue Philharmonie Hamburg © Neue Philharmonie Hamburg - Tigran Mikaelyan"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/neue-philharmonie-hamburg/18827">
+								Neue Philharmonie Hamburg
+							</a></p><p class="event-subtitle">Chopin / Tschaikowsky</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000f23bc" 
+                       data-name="Sat, 27 Aug 2022 - Neue Philharmonie Hamburg"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/neue-philharmonie-hamburg/18827"
+	   data-name="Neue Philharmonie Hamburg - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>22.15</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/neue-philharmonie-hamburg/18827"
+	   data-name="Neue Philharmonie Hamburg - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>22.15</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e90010258f" data-event-id="2330" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-28T11:00:00+02:00"><strong class="date nobreak">Sun, 28 Aug 2022</strong><span class="time">11:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/abel-selaocoe-manchester-collective/17762" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/d8/0ed8a64f-1776-47f8-9fff-21f4cb97771c/abel_selaocoe_c_mlungisi_mlungwana.jpg__219x164_q85_crop_subject_location-1289%2C411_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/d8/0ed8a64f-1776-47f8-9fff-21f4cb97771c/abel_selaocoe_c_mlungisi_mlungwana.jpg__392x294_q85_crop_subject_location-1289%2C411_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/d8/0ed8a64f-1776-47f8-9fff-21f4cb97771c/abel_selaocoe_c_mlungisi_mlungwana.jpg__442x328_q85_crop_subject_location-1289%2C411_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/d8/0ed8a64f-1776-47f8-9fff-21f4cb97771c/abel_selaocoe_c_mlungisi_mlungwana.jpg__219x164_q85_crop_subject_location-1289%2C411_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/d8/0ed8a64f-1776-47f8-9fff-21f4cb97771c/abel_selaocoe_c_mlungisi_mlungwana.jpg__392x294_q85_crop_subject_location-1289%2C411_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/d8/0ed8a64f-1776-47f8-9fff-21f4cb97771c/abel_selaocoe_c_mlungisi_mlungwana.jpg__442x328_q85_crop_subject_location-1289%2C411_subsampling-2_upscale.jpg" alt="Abel Selaocoe" title="Abel Selaocoe © Mlungisi Mlungwana"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/abel-selaocoe-manchester-collective/17762">
+								Abel Selaocoe / Manchester Collective
+							</a></p><p class="event-subtitle">Schleswig-Holstein Musik Festival</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:0010258f" 
+                       data-name="Sun, 28 Aug 2022 - Abel Selaocoe / Manchester Collective"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/abel-selaocoe-manchester-collective/17762"
+	   data-name="Abel Selaocoe / Manchester Collective - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>31.90</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/abel-selaocoe-manchester-collective/17762"
+	   data-name="Abel Selaocoe / Manchester Collective - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>31.90</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000f5c53" data-event-id="14613510" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-28T19:00:00+02:00"><strong class="date nobreak">Sun, 28 Aug 2022</strong><span class="time">19:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/anna-depenbusch-echtzeit-gala-mit-band-und-gasten/18174" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__219x164_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__392x294_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__442x328_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__219x164_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__392x294_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/74/47/7447b40c-2651-4107-9a6e-dab308304f20/anna_depenbusch_c_unbezeichnet.jpg__442x328_q85_crop_subject_location-951%2C384_subsampling-2_upscale.jpg" alt="Anna Depenbusch" title="Anna Depenbusch © Steven Haberland"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/anna-depenbusch-echtzeit-gala-mit-band-und-gasten/18174">
+								Anna Depenbusch – Echtzeit Gala mit Band und Gästen
+							</a></p><p class="event-subtitle">»Echtzeit«</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000f5c53" 
+                       data-name="Sun, 28 Aug 2022 - Anna Depenbusch – Echtzeit Gala mit Band und Gästen"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/anna-depenbusch-echtzeit-gala-mit-band-und-gasten/18174"
+	   data-name="Anna Depenbusch – Echtzeit Gala mit Band und Gästen - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>37.75</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/anna-depenbusch-echtzeit-gala-mit-band-und-gasten/18174"
+	   data-name="Anna Depenbusch – Echtzeit Gala mit Band und Gästen - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>37.75</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000b0d54" data-event-id="7262" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-28T20:00:00+02:00"><strong class="date nobreak">Sun, 28 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/brahms-ein-deutsches-requiem/17837" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/67/bf/67bfe709-b1c9-4380-bfae-98346ed71f40/kristinsson_johann_c_ammiel_bushakevitz.jpg__219x164_q85_crop_subject_location-1216%2C551_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/67/bf/67bfe709-b1c9-4380-bfae-98346ed71f40/kristinsson_johann_c_ammiel_bushakevitz.jpg__392x294_q85_crop_subject_location-1216%2C551_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/67/bf/67bfe709-b1c9-4380-bfae-98346ed71f40/kristinsson_johann_c_ammiel_bushakevitz.jpg__442x328_q85_crop_subject_location-1216%2C551_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/67/bf/67bfe709-b1c9-4380-bfae-98346ed71f40/kristinsson_johann_c_ammiel_bushakevitz.jpg__219x164_q85_crop_subject_location-1216%2C551_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/67/bf/67bfe709-b1c9-4380-bfae-98346ed71f40/kristinsson_johann_c_ammiel_bushakevitz.jpg__392x294_q85_crop_subject_location-1216%2C551_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/67/bf/67bfe709-b1c9-4380-bfae-98346ed71f40/kristinsson_johann_c_ammiel_bushakevitz.jpg__442x328_q85_crop_subject_location-1216%2C551_subsampling-2_upscale.jpg" alt="Jóhann Kristinsson" title="Jóhann Kristinsson © Ammiel Bushakevitz"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/brahms-ein-deutsches-requiem/17837">
+								Brahms: Ein deutsches Requiem
+							</a></p><p class="event-subtitle">Hamburg Philharmonic State Orchestra / Kent Nagano – Elbphilharmonie Summer</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000b0d54" 
+                       data-name="Sun, 28 Aug 2022 - Brahms: Ein deutsches Requiem"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/brahms-ein-deutsches-requiem/17837"
+	   data-name="Brahms: Ein deutsches Requiem - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>15.40</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/brahms-ein-deutsches-requiem/17837"
+	   data-name="Brahms: Ein deutsches Requiem - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>15.40</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000f635b" data-event-id="2305" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-29T19:30:00+02:00"><strong class="date nobreak">Mon, 29 Aug 2022</strong><span class="time">19:30</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/funf-sterne-deluxe-mikis-takeover-ensemble/17768" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/d9/e0/d9e0d87f-653c-4340-9c42-128c6dc27bea/fuenf_sterne_deluxe_c_david_koenigsmann.jpg__219x164_q85_crop_subject_location-951%2C539_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/d9/e0/d9e0d87f-653c-4340-9c42-128c6dc27bea/fuenf_sterne_deluxe_c_david_koenigsmann.jpg__392x294_q85_crop_subject_location-951%2C539_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/d9/e0/d9e0d87f-653c-4340-9c42-128c6dc27bea/fuenf_sterne_deluxe_c_david_koenigsmann.jpg__442x328_q85_crop_subject_location-951%2C539_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/d9/e0/d9e0d87f-653c-4340-9c42-128c6dc27bea/fuenf_sterne_deluxe_c_david_koenigsmann.jpg__219x164_q85_crop_subject_location-951%2C539_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/d9/e0/d9e0d87f-653c-4340-9c42-128c6dc27bea/fuenf_sterne_deluxe_c_david_koenigsmann.jpg__392x294_q85_crop_subject_location-951%2C539_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/d9/e0/d9e0d87f-653c-4340-9c42-128c6dc27bea/fuenf_sterne_deluxe_c_david_koenigsmann.jpg__442x328_q85_crop_subject_location-951%2C539_subsampling-2_upscale.jpg" alt="Fünf Sterne deluxe" title="Fünf Sterne deluxe © David Königsmann"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/funf-sterne-deluxe-mikis-takeover-ensemble/17768">
+								Fünf Sterne deluxe / Mikis Takeover! Ensemble
+							</a></p><p class="event-subtitle">Schleswig-Holstein Musik Festival</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000f635b" 
+                       data-name="Mon, 29 Aug 2022 - Fünf Sterne deluxe / Mikis Takeover! Ensemble"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/funf-sterne-deluxe-mikis-takeover-ensemble/17768"
+	   data-name="Fünf Sterne deluxe / Mikis Takeover! Ensemble - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>11</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/funf-sterne-deluxe-mikis-takeover-ensemble/17768"
+	   data-name="Fünf Sterne deluxe / Mikis Takeover! Ensemble - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>11</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000d3313" data-event-id="769" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-29T20:00:00+02:00"><strong class="date nobreak">Mon, 29 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/the-philadelphia-orchestra-lisa-batiashvili-yannick-nezet-seguin/17875" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/bb/d1/bbd127c0-006b-426e-a2e1-dee17f7b033d/lisa_batiashvili_c_dg_andre_josselin_1_gross.jpg__219x164_q85_crop_subject_location-1057%2C1238_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/bb/d1/bbd127c0-006b-426e-a2e1-dee17f7b033d/lisa_batiashvili_c_dg_andre_josselin_1_gross.jpg__392x294_q85_crop_subject_location-1057%2C1238_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/bb/d1/bbd127c0-006b-426e-a2e1-dee17f7b033d/lisa_batiashvili_c_dg_andre_josselin_1_gross.jpg__442x328_q85_crop_subject_location-1057%2C1238_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/bb/d1/bbd127c0-006b-426e-a2e1-dee17f7b033d/lisa_batiashvili_c_dg_andre_josselin_1_gross.jpg__219x164_q85_crop_subject_location-1057%2C1238_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/bb/d1/bbd127c0-006b-426e-a2e1-dee17f7b033d/lisa_batiashvili_c_dg_andre_josselin_1_gross.jpg__392x294_q85_crop_subject_location-1057%2C1238_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/bb/d1/bbd127c0-006b-426e-a2e1-dee17f7b033d/lisa_batiashvili_c_dg_andre_josselin_1_gross.jpg__442x328_q85_crop_subject_location-1057%2C1238_subsampling-2_upscale.jpg" alt="Lisa Batiashvili" title="Lisa Batiashvili © André Josselin"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/the-philadelphia-orchestra-lisa-batiashvili-yannick-nezet-seguin/17875">
+								The Philadelphia Orchestra / Lisa Batiashvili / Yannick Nézet-Séguin
+							</a></p><p class="event-subtitle">Szymanowski / Chausson / Beethoven – Elbphilharmonie Summer</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000d3313" 
+                       data-name="Mon, 29 Aug 2022 - The Philadelphia Orchestra / Lisa Batiashvili / Yannick Nézet-Séguin"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/the-philadelphia-orchestra-lisa-batiashvili-yannick-nezet-seguin/17875"
+	   data-name="The Philadelphia Orchestra / Lisa Batiashvili / Yannick Nézet-Séguin - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>33.20</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/the-philadelphia-orchestra-lisa-batiashvili-yannick-nezet-seguin/17875"
+	   data-name="The Philadelphia Orchestra / Lisa Batiashvili / Yannick Nézet-Séguin - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>33.20</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000f6361" data-event-id="2306" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-30T19:30:00+02:00"><strong class="date nobreak">Tue, 30 Aug 2022</strong><span class="time">19:30</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/andre-schuen-daniel-heide-klaus-maria-brandauer/17769" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/37/4a/374a8eb3-4fa6-4826-9866-a0b17532f271/klaus-maria_brandauer_c_nik_hunger.jpg__219x164_q85_crop_subject_location-1042%2C923_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/37/4a/374a8eb3-4fa6-4826-9866-a0b17532f271/klaus-maria_brandauer_c_nik_hunger.jpg__392x294_q85_crop_subject_location-1042%2C923_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/37/4a/374a8eb3-4fa6-4826-9866-a0b17532f271/klaus-maria_brandauer_c_nik_hunger.jpg__442x328_q85_crop_subject_location-1042%2C923_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/37/4a/374a8eb3-4fa6-4826-9866-a0b17532f271/klaus-maria_brandauer_c_nik_hunger.jpg__219x164_q85_crop_subject_location-1042%2C923_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/37/4a/374a8eb3-4fa6-4826-9866-a0b17532f271/klaus-maria_brandauer_c_nik_hunger.jpg__392x294_q85_crop_subject_location-1042%2C923_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/37/4a/374a8eb3-4fa6-4826-9866-a0b17532f271/klaus-maria_brandauer_c_nik_hunger.jpg__442x328_q85_crop_subject_location-1042%2C923_subsampling-2_upscale.jpg" alt="Klaus-Maria Brandauer" title="Klaus-Maria Brandauer © Nik Hunger"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/andre-schuen-daniel-heide-klaus-maria-brandauer/17769">
+								Andrè Schuen / Daniel Heide / Klaus-Maria Brandauer
+							</a></p><p class="event-subtitle">Schleswig-Holstein Musik Festival</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000f6361" 
+                       data-name="Tue, 30 Aug 2022 - Andrè Schuen / Daniel Heide / Klaus-Maria Brandauer"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/andre-schuen-daniel-heide-klaus-maria-brandauer/17769"
+	   data-name="Andrè Schuen / Daniel Heide / Klaus-Maria Brandauer - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>20.90</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/andre-schuen-daniel-heide-klaus-maria-brandauer/17769"
+	   data-name="Andrè Schuen / Daniel Heide / Klaus-Maria Brandauer - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>20.90</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000d3311" data-event-id="26546" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-30T20:00:00+02:00"><strong class="date nobreak">Tue, 30 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/season-opening-the-philadelphia-orchestra/17874" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/83/ba83a2e2-b91b-484b-bc2a-53c172b842d0/yannick_nezet-seguin_c_george_etheredge.jpg__219x164_q85_crop_subject_location-1061%2C850_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/83/ba83a2e2-b91b-484b-bc2a-53c172b842d0/yannick_nezet-seguin_c_george_etheredge.jpg__392x294_q85_crop_subject_location-1061%2C850_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/83/ba83a2e2-b91b-484b-bc2a-53c172b842d0/yannick_nezet-seguin_c_george_etheredge.jpg__442x328_q85_crop_subject_location-1061%2C850_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/83/ba83a2e2-b91b-484b-bc2a-53c172b842d0/yannick_nezet-seguin_c_george_etheredge.jpg__219x164_q85_crop_subject_location-1061%2C850_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/83/ba83a2e2-b91b-484b-bc2a-53c172b842d0/yannick_nezet-seguin_c_george_etheredge.jpg__392x294_q85_crop_subject_location-1061%2C850_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/83/ba83a2e2-b91b-484b-bc2a-53c172b842d0/yannick_nezet-seguin_c_george_etheredge.jpg__442x328_q85_crop_subject_location-1061%2C850_subsampling-2_upscale.jpg" alt="Yannick Nézet-Séguin" title="Yannick Nézet-Séguin © George Etheridge"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/season-opening-the-philadelphia-orchestra/17874">
+								Season Opening / The Philadelphia Orchestra
+							</a></p><p class="event-subtitle">Yannick Nézet-Séguin / Angel Blue – Elbphilharmonie Summer</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000d3311" 
+                       data-name="Tue, 30 Aug 2022 - Season Opening / The Philadelphia Orchestra"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="residue-status status-box"><a class="link link-ticket" href="/en/whats-on/ticket/season-opening-the-philadelphia-orchestra/17874" data-name="Season Opening / The Philadelphia Orchestra - Limited tickets available!" >
+					Limited tickets available!
+				</a></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/season-opening-the-philadelphia-orchestra/17874"
+	   data-name="Season Opening / The Philadelphia Orchestra - Order tickets regardless"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>76</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000f6362" data-event-id="2160" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-31T19:30:00+02:00"><strong class="date nobreak">Wed, 31 Aug 2022</strong><span class="time">19:30</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/kammerorchester-basel-maria-joao-pires-trevor-pinnock/17924" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a1/13/a113fa31-3661-44a5-84dc-b3dc4e632c87/maria_joao_pires_c_caroline_doutre_sw.jpg__219x164_q85_crop_subject_location-997%2C375_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a1/13/a113fa31-3661-44a5-84dc-b3dc4e632c87/maria_joao_pires_c_caroline_doutre_sw.jpg__392x294_q85_crop_subject_location-997%2C375_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a1/13/a113fa31-3661-44a5-84dc-b3dc4e632c87/maria_joao_pires_c_caroline_doutre_sw.jpg__442x328_q85_crop_subject_location-997%2C375_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a1/13/a113fa31-3661-44a5-84dc-b3dc4e632c87/maria_joao_pires_c_caroline_doutre_sw.jpg__219x164_q85_crop_subject_location-997%2C375_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a1/13/a113fa31-3661-44a5-84dc-b3dc4e632c87/maria_joao_pires_c_caroline_doutre_sw.jpg__392x294_q85_crop_subject_location-997%2C375_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a1/13/a113fa31-3661-44a5-84dc-b3dc4e632c87/maria_joao_pires_c_caroline_doutre_sw.jpg__442x328_q85_crop_subject_location-997%2C375_subsampling-2_upscale.jpg" alt="Maria João Pires" title="Maria João Pires © Caroline Doutre"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/kammerorchester-basel-maria-joao-pires-trevor-pinnock/17924">
+								Kammerorchester Basel / Maria João Pires / Trevor Pinnock
+							</a></p><p class="event-subtitle">Mozart / Ravel / Gounod</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000f6362" 
+                       data-name="Wed, 31 Aug 2022 - Kammerorchester Basel / Maria João Pires / Trevor Pinnock"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/kammerorchester-basel-maria-joao-pires-trevor-pinnock/17924"
+	   data-name="Kammerorchester Basel / Maria João Pires / Trevor Pinnock - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>31.90</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/kammerorchester-basel-maria-joao-pires-trevor-pinnock/17924"
+	   data-name="Kammerorchester Basel / Maria João Pires / Trevor Pinnock - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>31.90</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000c9d5a" data-event-id="770" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-31T20:00:00+02:00"><strong class="date nobreak">Wed, 31 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/the-cleveland-orchestra-franz-welser-most/17872" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/46/0c/460cdf37-fb78-4e04-abfa-68f815ecd184/franz_welser-moest_c_roger_mastroianni_4.jpg__219x164_q85_crop_subject_location-1216%2C549_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/46/0c/460cdf37-fb78-4e04-abfa-68f815ecd184/franz_welser-moest_c_roger_mastroianni_4.jpg__392x294_q85_crop_subject_location-1216%2C549_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/46/0c/460cdf37-fb78-4e04-abfa-68f815ecd184/franz_welser-moest_c_roger_mastroianni_4.jpg__442x328_q85_crop_subject_location-1216%2C549_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/46/0c/460cdf37-fb78-4e04-abfa-68f815ecd184/franz_welser-moest_c_roger_mastroianni_4.jpg__219x164_q85_crop_subject_location-1216%2C549_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/46/0c/460cdf37-fb78-4e04-abfa-68f815ecd184/franz_welser-moest_c_roger_mastroianni_4.jpg__392x294_q85_crop_subject_location-1216%2C549_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/46/0c/460cdf37-fb78-4e04-abfa-68f815ecd184/franz_welser-moest_c_roger_mastroianni_4.jpg__442x328_q85_crop_subject_location-1216%2C549_subsampling-2_upscale.jpg" alt="Franz Welser-Möst" title="Franz Welser-Möst © Roger Mastroianni"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/the-cleveland-orchestra-franz-welser-most/17872">
+								The Cleveland Orchestra / Franz Welser-Möst
+							</a></p><p class="event-subtitle">Berg / Bruckner – Elbphilharmonie Summer</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000c9d5a" 
+                       data-name="Wed, 31 Aug 2022 - The Cleveland Orchestra / Franz Welser-Möst"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/the-cleveland-orchestra-franz-welser-most/17872"
+	   data-name="The Cleveland Orchestra / Franz Welser-Möst - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>33.20</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/the-cleveland-orchestra-franz-welser-most/17872"
+	   data-name="The Cleveland Orchestra / Franz Welser-Möst - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>33.20</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e90011f0b0" data-event-id="27798" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-08-31T20:00:00+02:00"><strong class="date nobreak">Wed, 31 Aug 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/ingolf-burkhardt-florian-weber-wu-wei/18783" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/10/37/10373800-475e-48f3-9f4c-638d7fd0ef07/wu_wei_c_liudmila_jeremies.jpg__219x164_q85_crop_subject_location-658%2C475_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/10/37/10373800-475e-48f3-9f4c-638d7fd0ef07/wu_wei_c_liudmila_jeremies.jpg__392x294_q85_crop_subject_location-658%2C475_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/10/37/10373800-475e-48f3-9f4c-638d7fd0ef07/wu_wei_c_liudmila_jeremies.jpg__442x328_q85_crop_subject_location-658%2C475_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/10/37/10373800-475e-48f3-9f4c-638d7fd0ef07/wu_wei_c_liudmila_jeremies.jpg__219x164_q85_crop_subject_location-658%2C475_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/10/37/10373800-475e-48f3-9f4c-638d7fd0ef07/wu_wei_c_liudmila_jeremies.jpg__392x294_q85_crop_subject_location-658%2C475_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/10/37/10373800-475e-48f3-9f4c-638d7fd0ef07/wu_wei_c_liudmila_jeremies.jpg__442x328_q85_crop_subject_location-658%2C475_subsampling-2_upscale.jpg" alt="Wu Wei" title="Wu Wei © Liudmila Jeremies"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/ingolf-burkhardt-florian-weber-wu-wei/18783">
+								Ingolf Burkhardt / Florian Weber / Wu Wei
+							</a></p><p class="event-subtitle">»Silk Blues«</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:0011f0b0" 
+                       data-name="Wed, 31 Aug 2022 - Ingolf Burkhardt / Florian Weber / Wu Wei"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/ingolf-burkhardt-florian-weber-wu-wei/18783"
+	   data-name="Ingolf Burkhardt / Florian Weber / Wu Wei - Order tickets regardless"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>15</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/ingolf-burkhardt-florian-weber-wu-wei/18783"
+	   data-name="Ingolf Burkhardt / Florian Weber / Wu Wei - Order tickets regardless"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>15</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9000c9d5c" data-event-id="26278" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-09-01T19:30:00+02:00"><strong class="date nobreak">Thu, 1 Sep 2022</strong><span class="time">19:30</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/the-cleveland-orchestra-franz-welser-most/17873" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/6d/2e/6d2e095e-45f1-4baf-8962-4aba3fb965a2/franz_welser-moest_c_roger_mastroianni_8.jpg__219x164_q85_crop_subject_location-1390%2C439_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/6d/2e/6d2e095e-45f1-4baf-8962-4aba3fb965a2/franz_welser-moest_c_roger_mastroianni_8.jpg__392x294_q85_crop_subject_location-1390%2C439_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/6d/2e/6d2e095e-45f1-4baf-8962-4aba3fb965a2/franz_welser-moest_c_roger_mastroianni_8.jpg__442x328_q85_crop_subject_location-1390%2C439_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/6d/2e/6d2e095e-45f1-4baf-8962-4aba3fb965a2/franz_welser-moest_c_roger_mastroianni_8.jpg__219x164_q85_crop_subject_location-1390%2C439_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/6d/2e/6d2e095e-45f1-4baf-8962-4aba3fb965a2/franz_welser-moest_c_roger_mastroianni_8.jpg__392x294_q85_crop_subject_location-1390%2C439_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/6d/2e/6d2e095e-45f1-4baf-8962-4aba3fb965a2/franz_welser-moest_c_roger_mastroianni_8.jpg__442x328_q85_crop_subject_location-1390%2C439_subsampling-2_upscale.jpg" alt="Franz Welser-Möst" title="Franz Welser-Möst © Roger Mastroianni"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/the-cleveland-orchestra-franz-welser-most/17873">
+								The Cleveland Orchestra / Franz Welser-Möst
+							</a></p><p class="event-subtitle">Rihm / Schubert – Elbphilharmonie Summer</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:000c9d5c" 
+                       data-name="Thu, 1 Sep 2022 - The Cleveland Orchestra / Franz Welser-Möst"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/the-cleveland-orchestra-franz-welser-most/17873"
+	   data-name="The Cleveland Orchestra / Franz Welser-Möst - Order tickets regardless"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>87</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/the-cleveland-orchestra-franz-welser-most/17873"
+	   data-name="The Cleveland Orchestra / Franz Welser-Möst - Order tickets regardless"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>87</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e900110b67" data-event-id="15322026" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2022-09-01T20:00:00+02:00"><strong class="date nobreak">Thu, 1 Sep 2022</strong><span class="time">20:00</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/en/whats-on/carl-philipp-emanuel-bach-chor-hamburg-hansjorg-albrecht/18922" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/1f/92/1f9267ce-d929-416f-88e3-9116abd85eeb/carl-philipp-emanuel-bach-chor_c_christian_perl.jpg__219x164_q85_crop_subject_location-960%2C649_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/1f/92/1f9267ce-d929-416f-88e3-9116abd85eeb/carl-philipp-emanuel-bach-chor_c_christian_perl.jpg__392x294_q85_crop_subject_location-960%2C649_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/1f/92/1f9267ce-d929-416f-88e3-9116abd85eeb/carl-philipp-emanuel-bach-chor_c_christian_perl.jpg__442x328_q85_crop_subject_location-960%2C649_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/1f/92/1f9267ce-d929-416f-88e3-9116abd85eeb/carl-philipp-emanuel-bach-chor_c_christian_perl.jpg__219x164_q85_crop_subject_location-960%2C649_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/1f/92/1f9267ce-d929-416f-88e3-9116abd85eeb/carl-philipp-emanuel-bach-chor_c_christian_perl.jpg__392x294_q85_crop_subject_location-960%2C649_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/1f/92/1f9267ce-d929-416f-88e3-9116abd85eeb/carl-philipp-emanuel-bach-chor_c_christian_perl.jpg__442x328_q85_crop_subject_location-960%2C649_subsampling-2_upscale.jpg" alt="Carl-Philipp-Emanuel-Bach-Chor" title="Carl-Philipp-Emanuel-Bach-Chor © Christian Perl"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/en/whats-on/carl-philipp-emanuel-bach-chor-hamburg-hansjorg-albrecht/18922">
+								Carl-Philipp-Emanuel-Bach-Chor Hamburg / Hansjörg Albrecht
+							</a></p><p class="event-subtitle">Händel</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:00110b67" 
+                       data-name="Thu, 1 Sep 2022 - Carl-Philipp-Emanuel-Bach-Chor Hamburg / Hansjörg Albrecht"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Save for later' 
+                        data-bookmark-text-on='<strong>Event saved</strong>' 
+                        data-bookmark-alert-off='Save for later / Ticket alert'
+                        data-bookmark-alert-one-on='<strong>Event saved /</strong> Ticket alert'
+                        data-bookmark-alert-two-on='<strong>Event saved / Ticket alert activated</strong>'
+                   >Save for later</span>&nbsp;
+                </button></div><!-- <span></span> --><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/carl-philipp-emanuel-bach-chor-hamburg-hansjorg-albrecht/18922"
+	   data-name="Carl-Philipp-Emanuel-Bach-Chor Hamburg / Hansjörg Albrecht - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>25</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/en/whats-on/ticket/carl-philipp-emanuel-bach-chor-hamburg-hansjorg-albrecht/18922"
+	   data-name="Carl-Philipp-Emanuel-Bach-Chor Hamburg / Hansjörg Albrecht - Order tickets regardless"
+
+	
+		
+			target="_blank"
+		
+	
+
+	
+		
+			target="_blank"
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">from €</span></span><span class="price-from"><span>25</span></span></a></span></div></div></div></div></div></li>
+
+
+
+
+	
+<li class="loading-event loading-animation">Loading...</li>
+
+
+
+
+
+	<li data-url="/en/whats-on/02-09-2022/">
+		<noscript>
+			<div class="grid-container">
+				<div class="grid-x grid-margin-x">
+					<div class="cell text-center">
+						<a href="/en/whats-on/02-09-2022/" class="link link-default button secondary">
+							Next
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="spacer"></div>
+		</noscript>
+	</li>
+
+
+								</ul>
+							</div>
+						</div>
+					
+
+				</section>
+
+			</div>
+		</div>
+	</div>
+
+  
+
+
+      
+
+<aside class="merklist-modal">
+	<div class="merklist-modal__wrapper">
+		<button class="merklist-modal__close js-merklist-modal__close" type="button" title="Close"></button>
+    <!-- MODAL: login -->
+    <div class="merklist-modal__content" data-modal="login">
+      <p class="merklist-modal__title line-center h3">Saved events</p>
+      <p class="merklist-modal__text">Login required. If you do not have an Elbphilharmonie customer account, registering is quick and easy.</p>
+      <div class="merklist-modal__button">
+        <a href="#" class="button link link-default merklist-modal__account">Log in or register</a>
+      </div>
+    </div>
+    <!-- MODAL: alert check -->
+    <div class="merklist-modal__content" data-modal="alert" style="display: none;">
+      <p class="merklist-modal__title line-center h3">Your selection</p>
+      <label  class="merklist-modal__label">
+      <input type="radio" name="alert" class="merklist-modal__radio" value="1">
+        <span>Add to saved events</span>
+      </label>
+      <label class="merklist-modal__label">
+      <input type="radio" name="alert" class="merklist-modal__radio" value="2" checked>
+        <span>Activate ticket alert</span>
+        <span class="merklist-modal__text">You will receive an email alert one day before tickets go on sale.</span>
+      </label>
+      <div class="merklist-modal__button">
+        <button type="button" class="button link link-default merklist-modal__save">Confirm</button>
+      </div>
+    </div>
+    <!-- MODAL: alert uncheck -->
+    <div class="merklist-modal__content" data-modal="uncheck" style="display: none;">
+      <p class="merklist-modal__title line-center h3">Edit events saved</p>
+      <label class="merklist-modal__label">
+        <input type="radio" name="uncheck" class="merklist-modal__radio" value="1" checked>
+        <span>Deactivate ticket alert</span>
+      </label>
+      <label  class="merklist-modal__label">
+        <input type="radio" name="uncheck" class="merklist-modal__radio" value="DELETE">
+        <span>Remove event from my saved events</span>
+      </label>
+      <div class="merklist-modal__button">
+        <button type="button" class="button link link-default merklist-modal__save">Confirm</button>
+      </div>
+    </div>
+	</div>
+</aside>
+
+      <aside class="blog__lightbox">
+  <div class="blog__lightbox-container">
+    <button class="blog__lightbox-close" title="Close modal"></button>
+    <div class="blog__lightbox-wrapper">
+      <iframe src="" frameborder="0" id="blog-iframe" class="blog__lightbox-iframe" allow="fullscreen"></iframe>
+    </div>
+  </div>
+</aside>
+
+		</main>
+
+		
+
+
+	</div>
+
+	
+
+  <script>
+    var Instance = 'live';
+  </script>
+
+	
+	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/build/app.min.394e1890b091.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js" async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/ScrollToPlugin.min.js" async></script>
+  <script src="https://cdn.elbphilharmonie.de/en/webshop/v2/api.js"></script>
+
+  
+
+	
+
+	
+
+	
+	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/build/booking-list-page.min.1c5b1f7f35b4.js" type="text/javascript"></script>
+	<script>
+    Calendar.months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ]
+	</script>
+
+
+	
+
+	
+
+  	<script src="/ep/consent-en.js" async defer></script>
+	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/src/cookie-handler.6d5361201851.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" async></script>
+	<!-- INSTANCE_NAME: live -->
+</body>
+</html>

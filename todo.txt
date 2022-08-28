@@ -1,7 +1,9 @@
 * prototype a calendar extractor service
-  * write a second extractor
-    * detect datetimes, and then find largest non-overlapping divs, and then take each to be one event
-    * in python?
-  * later
-    * improve text extraction
-    * improve datetime extraction
+  * rename from 'smallest_div_...' to 'smallest_element_...' since you don't guarantee anymore that it is a div
+  * make elphi test pass
+    * option 1: extract not from smallest div with single date, but from largest div with single event?
+    * option 2: always go up to the next li, if there is one, when you extract text
+  * it might be better to filter out date strings only when you check whether the text is long enough to plausibly be an event, but not when you
+  * get more websites to work 
+    * https://www.staatsschauspiel-dresden.de/spielplan/monatsplan/
+* if you have a good, robust extractor service, relegate the current website to /debug and write a nicer one

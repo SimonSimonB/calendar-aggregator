@@ -4,6 +4,7 @@ use chrono::{NaiveDateTime, NaiveDate};
 use serde::ser::{Serializer, SerializeStructVariant};
 
 pub mod smallest_div_with_date;
+mod date_extraction;
 
 pub trait EventExtractor {
   fn code_to_events(website_code: &str) -> Vec<Event>;
