@@ -1,5 +1,4 @@
 * prototype a calendar extractor service
-  * rename from 'smallest_div_...' to 'smallest_element_...' since you don't guarantee anymore that it is a div
   * only return events with date >= today (write test for that)
   * it might be better to filter out date strings only when you check whether the text is long enough to plausibly be an event, but not when you
   * get more websites to work 
@@ -12,3 +11,4 @@ https://www.grugapark.de/erleben/veranstaltungskalender_2/veranstaltungskalender
   * make websites work with selenium
     * two tests for that already
   * can you leverage ul structures, where present?
+* cache events, return from cache if updated <=5min ago, and use etag to ask website whether it's HTML has changed if >5min ago

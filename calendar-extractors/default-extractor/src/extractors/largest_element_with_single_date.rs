@@ -5,11 +5,11 @@ use super::Event;
 use super::EventExtractor;
 use super::date_extraction;
 
-pub struct SmallestDivWithDateExtractor {
+pub struct LargestElementWithSingleDateExtractor {
 }
 
 
-impl EventExtractor for SmallestDivWithDateExtractor {
+impl EventExtractor for LargestElementWithSingleDateExtractor {
   fn code_to_events(website_code: &str) -> Vec<Event> {
     let document = scraper::Html::parse_document(website_code);
     let start_elements_to_try = ["main", "body", "html"];
@@ -44,7 +44,7 @@ fn element_to_events(el: &ElementRef) -> Vec<Event> {
   // If no events were found in any of the children, then try to extract an event from the totality of 
   // text in this element.
   if events.is_empty() {
-    if let Some(event) = div_to_one_event(el) {
+    if let Some(event) = element_to_one_event(el) {
       events = vec![event];
     }
   }
@@ -53,7 +53,7 @@ fn element_to_events(el: &ElementRef) -> Vec<Event> {
   else if events.len() == 1 {
     let dates = date_extraction::extract_datetimes(el);
     if dates.len() == 1 {
-      if let Some(event) = div_to_one_event(el) {
+      if let Some(event) = element_to_one_event(el) {
         events = vec![event];
       }
     }
@@ -62,7 +62,7 @@ fn element_to_events(el: &ElementRef) -> Vec<Event> {
   events
 }
 
-fn div_to_one_event(el: &ElementRef) -> Option<Event> {
+fn element_to_one_event(el: &ElementRef) -> Option<Event> {
   let dates = date_extraction::extract_datetimes(el);
 
   if dates.len() != 1 {

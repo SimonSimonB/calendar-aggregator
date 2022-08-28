@@ -3,7 +3,7 @@ use std::fmt;
 use chrono::{NaiveDateTime, NaiveDate};
 use serde::ser::{Serializer, SerializeStructVariant};
 
-pub mod smallest_div_with_date;
+pub mod largest_element_with_single_date;
 mod date_extraction;
 
 pub trait EventExtractor {
