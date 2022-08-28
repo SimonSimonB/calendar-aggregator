@@ -7,7 +7,7 @@ pub mod largest_element_with_single_date;
 mod date_extraction;
 
 pub trait EventExtractor {
-  fn code_to_events(website_code: &str) -> Vec<Event>;
+  fn code_to_events(website_code: &str, from_date: &NaiveDate) -> Vec<Event>;
 }
 
 #[derive(Debug, serde::Serialize)]

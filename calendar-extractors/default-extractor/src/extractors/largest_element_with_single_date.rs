@@ -1,8 +1,10 @@
+use chrono::NaiveDate;
 use regex::Regex;
 use scraper::{ElementRef};
 
 use super::Event;
 use super::EventExtractor;
+use super::NaiveDateWithOptionalTime;
 use super::date_extraction;
 
 pub struct LargestElementWithSingleDateExtractor {
@@ -10,14 +12,21 @@ pub struct LargestElementWithSingleDateExtractor {
 
 
 impl EventExtractor for LargestElementWithSingleDateExtractor {
-  fn code_to_events(website_code: &str) -> Vec<Event> {
+  fn code_to_events(website_code: &str, from_date: &NaiveDate) -> Vec<Event> {
     let document = scraper::Html::parse_document(website_code);
     let start_elements_to_try = ["main", "body", "html"];
     for start_element in start_elements_to_try {
       let main_selector = scraper::Selector::parse(start_element).unwrap();
       let start_elements: Vec<ElementRef> = document.select(&main_selector).collect::<Vec<ElementRef>>();
       if start_elements.len() > 0 {
-        return element_to_events(&start_elements[0])
+        let mut events = element_to_events(&start_elements[0]);
+        events = events.into_iter().filter(|event| { 
+          match event.time.start {
+            NaiveDateWithOptionalTime::NaiveDate(d) => !d.lt(from_date),
+            NaiveDateWithOptionalTime::NaiveDateTime(d) => !d.date().lt(from_date),
+          }
+        }).collect();
+        return events;
       }
     }
     // TODO: Could return an error here instead of returning an empty list. That might help with debugging empty results
