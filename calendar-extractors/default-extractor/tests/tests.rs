@@ -62,6 +62,28 @@ fn test_some_events_from_elbphilharmonie() {
 }
 
 #[test]
+fn test_some_events_from_gruga() {
+  let test_response = get_test_response("gruga.html");
+
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
+  assert!(10 < results.len());
+  assert!(results.len() < 100);
+  assert!(results.into_iter().find(|r| r.text.contains("Farbenpracht der Dahlie")).is_some())
+}
+
+#[test]
+#[ignore]
+// To get this test to work, you'll need to switch from HTTP request to headless browser executing the JS.
+fn test_some_events_from_theater_hamburg() {
+  let test_response = get_test_response("theater-hamburg.html");
+
+  let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
+  assert!(10 < results.len());
+  assert!(results.len() < 70);
+  assert!(results.into_iter().find(|r| r.text.contains("Footloose")).is_some())
+}
+
+#[test]
 #[ignore]
 // To get this test to work, you'll need to switch from HTTP request to headless browser executing the JS.
 fn test_some_events_from_radio_essen() {

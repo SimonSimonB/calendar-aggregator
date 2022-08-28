@@ -15,7 +15,7 @@ const DAY_OF_MONTH: &str = r"0?[1-9]|[12][0-9]|3[01]";
 const NUMERIC_MONTH: &str = r"0?[1-9]|1[0-2]";
 trait DateExtractor {
   fn get_regexp(&self) -> regex::Regex;
-  fn extract(&self, captures: regex::Captures) -> NaiveDateWithOptionalTime;
+  fn extract(&self, captures: regex::Captures) -> Option<NaiveDateWithOptionalTime>;
 }
 
 struct DateWithNumericMonthExtractor {}
@@ -24,11 +24,14 @@ impl DateExtractor for DateWithNumericMonthExtractor {
     Regex::new(&format!(r"({})\.({})\.", DAY_OF_MONTH, NUMERIC_MONTH)).unwrap()
   }
 
-  fn extract(&self, captures: regex::Captures) -> NaiveDateWithOptionalTime {
+  fn extract(&self, captures: regex::Captures) -> Option<NaiveDateWithOptionalTime> {
     let month = captures[2].parse::<u32>().unwrap();
     let day = captures[1].parse::<u32>().unwrap();
 
-    NaiveDate::from_ymd(2022, month, day).into()
+    match NaiveDate::from_ymd_opt(2022, month, day) {
+      None => None,
+      Some(e) => Some(e.into()),
+    }
   }
 }
 
@@ -69,11 +72,16 @@ impl DateExtractor for DateWithGermanMonthExtractor {
     Regex::new(&format!(r"({})\.?\s?({})", DAY_OF_MONTH, month_names_joined)).unwrap()
   }
 
-  fn extract(&self, captures: regex::Captures) -> NaiveDateWithOptionalTime {
+  fn extract(&self, captures: regex::Captures) -> Option<NaiveDateWithOptionalTime> {
     let german_month_to_num = DateWithGermanMonthExtractor::get_month_to_num();
     let month = german_month_to_num[&captures[2]];
     let day = captures[1].parse::<u32>().unwrap();
-    NaiveDate::from_ymd(2022, month, day).into()
+    println!("Month: {}\nDay: {}", month, day);
+    
+    match NaiveDate::from_ymd_opt(2022, month, day) {
+      None => None,
+      Some(e) => Some(e.into()),
+    }
   }
 }
 
@@ -86,7 +94,10 @@ pub fn extract_datetimes(div: &ElementRef) -> Vec<DateMatch> {
   println!("{}\n", text);
   for date_extractor in date_extractors {
     for captured in date_extractor.get_regexp().find_iter(&text).zip(date_extractor.get_regexp().captures_iter(&text)) {
-      results.push(DateMatch { date: date_extractor.extract(captured.1), matched_string: captured.0.as_str().to_owned() });
+      match date_extractor.extract(captured.1) {
+        None => (),
+        Some(date) => results.push(DateMatch { date: date, matched_string: captured.0.as_str().to_owned() })
+      }
     }
     if results.len() > 0 {
       break;

@@ -1,9 +1,14 @@
 * prototype a calendar extractor service
   * rename from 'smallest_div_...' to 'smallest_element_...' since you don't guarantee anymore that it is a div
-  * make elphi test pass
-    * option 1: extract not from smallest div with single date, but from largest div with single event?
-    * option 2: always go up to the next li, if there is one, when you extract text
+  * only return events with date >= today (write test for that)
   * it might be better to filter out date strings only when you check whether the text is long enough to plausibly be an event, but not when you
   * get more websites to work 
     * https://www.staatsschauspiel-dresden.de/spielplan/monatsplan/
+    * https://theater-hamburg.org/de_DE/spielplan?myprofile=false&category_system=from_file&date=28.08.2022
 * if you have a good, robust extractor service, relegate the current website to /debug and write a nicer one
+https://www.grugapark.de/erleben/veranstaltungskalender_2/veranstaltungskalender.de.html
+
+* further improvements to event extraction
+  * make websites work with selenium
+    * two tests for that already
+  * can you leverage ul structures, where present?
