@@ -58,7 +58,7 @@ fn test_some_events_from_elbphilharmonie() {
   let results = SmallestDivWithDateExtractor::code_to_events(&test_response);
   assert!(10 < results.len());
   assert!(results.len() < 70);
-  assert!(results.into_iter().find(|r| r.text.contains("THE PHILADELPHIA ORCHESTRA")).is_some())
+  assert!(results.into_iter().find(|r| r.text.contains("The Philadelphia Orchestra")).is_some())
 }
 
 #[test]

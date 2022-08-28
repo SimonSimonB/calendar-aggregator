@@ -41,11 +41,21 @@ fn element_to_events(el: &ElementRef) -> Vec<Event> {
     }
   }
 
-  // If, and only if, no events were found in each of the children, then try to extract an event from the totality of 
+  // If no events were found in any of the children, then try to extract an event from the totality of 
   // text in this element.
   if events.is_empty() {
     if let Some(event) = div_to_one_event(el) {
-      events.push(event);
+      events = vec![event];
+    }
+  }
+  // If one event was extracted from all of the children, and just one date is found below this node
+  // then try to extract this event again, but from this node, i.e., with more text.
+  else if events.len() == 1 {
+    let dates = date_extraction::extract_datetimes(el);
+    if dates.len() == 1 {
+      if let Some(event) = div_to_one_event(el) {
+        events = vec![event];
+      }
     }
   }
 
