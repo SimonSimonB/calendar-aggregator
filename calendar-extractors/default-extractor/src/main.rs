@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, collections::HashMap};
 use default_extractor::extractors::{Event};
 use rocket::serde::json::Json;
 use serde::Deserialize;
@@ -12,9 +12,13 @@ struct EventsRequest {
 }
 
 #[post("/events", format = "application/json", data = "<request>")]
-async fn get_events(request: Json<EventsRequest>) -> Json<Vec<Event>> {
+async fn get_events(request: Json<EventsRequest>) -> Json<HashMap<String, Vec<Event>>> {
     let urls = &request.urls;
-    let events = default_extractor::extract(&urls[0]).await.unwrap();
+    let mut events: HashMap<String, Vec<Event>> = HashMap::new();
+    for url in urls {
+        let events_for_url = default_extractor::extract(&url).await.unwrap();
+        events.insert(url.to_owned(), events_for_url);
+    }
 
     Json(events)
 }
