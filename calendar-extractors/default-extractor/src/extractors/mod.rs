@@ -10,12 +10,6 @@ pub trait EventExtractor {
   fn code_to_events(website_code: &str, from_date: &NaiveDate) -> Vec<Event>;
 }
 
-#[derive(Debug, serde::Serialize)]
-pub struct EventTimeRange {
-  pub start: NaiveDateWithOptionalTime,
-  pub end: Option<NaiveDateWithOptionalTime>,
-}
-
 #[derive(Debug, Copy, Clone)]
 pub enum NaiveDateWithOptionalTime {
   NaiveDate(NaiveDate),
@@ -51,21 +45,12 @@ impl From<NaiveDate> for NaiveDateWithOptionalTime {
 #[derive(Debug, serde::Serialize)]
 pub struct Event {
   pub text: String,
-  pub time: EventTimeRange,
+  pub time: NaiveDateWithOptionalTime,
 }
 
 impl fmt::Display for Event {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     write!(f, "{} {}", self.text, self.time)
-  }
-}
-
-impl fmt::Display for EventTimeRange {
-  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    match self.end {
-      Some(end) => write!(f, "{} {}", self.start, end),
-      None => write!(f, "{}", self.start),
-    }
   }
 }
 
@@ -76,10 +61,10 @@ impl fmt::Display for NaiveDateWithOptionalTime {
 }
 
 impl Event {
-  pub fn new(text: &str, start: NaiveDateWithOptionalTime, end: Option<NaiveDateWithOptionalTime>) -> Event {
+  pub fn new(text: &str, time: NaiveDateWithOptionalTime) -> Event {
     Event { 
       text: text.to_owned(),
-      time: EventTimeRange { start: start, end: end },
+      time: time,
     }
   } 
 }

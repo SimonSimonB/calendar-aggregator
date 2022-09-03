@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+export interface Event {
+  text: string,
+  time: any,
+}
 
 async function getEvents(calendarUrl: string) {
   const response = await fetch('http://127.0.0.1:8000/api/events', {
@@ -11,25 +15,40 @@ async function getEvents(calendarUrl: string) {
     body: JSON.stringify({'urls': [calendarUrl]}),
   });
 
-  return response.json();
+  const json = await response.json();
+  return new Map<string, Event[]>(Object.entries(json));
 }
 
-function EventTable(props: any) {
+interface EventWithUrl {
+  event: Event,
+  url: string,
+}
+
+function EventTable(props: {events: Map<string, Event[]>}) {
+  let allEvents: Array<EventWithUrl> = Array.from(props.events.entries())
+    .map(([url, events]) => events.map<EventWithUrl>((event) => {return {url: url, event: event};}))
+    .flat()
+    .flat();
+  allEvents.sort((eventWithUrl1, eventWithUrl2) => eventWithUrl1.event.time > eventWithUrl2.event.time ? 1 : -1)
   return (
     <div>
       <div>
-        {props.events.length}
+        {Array.from(props.events.values())
+          .map((eventsForUrl) => eventsForUrl.length)
+          .reduce((acc: number, currentValue: number) => acc + currentValue, 0)}
       </div>
       <table>
         <thead>
-          <th>Date</th>
-          <th>What</th>
+          <tr>
+            <th>Date</th>
+            <th>What</th>
+          </tr>
         </thead>
         <tbody>
-          {props.events.map((event: any) => 
+          {allEvents.map((eventWithUrl) => 
             <tr>
-              <td>{JSON.stringify(event.time.start.NaiveDate.date)}</td>
-              <td>{event.text}</td>
+              <td>{JSON.stringify(eventWithUrl.event.time.NaiveDate.date)}</td>
+              <td>{eventWithUrl.event.text}</td>
             </tr>)}
           </tbody>
       </table>
@@ -38,7 +57,7 @@ function EventTable(props: any) {
 }
 
 function App() {
-  let [events, setEvents] = useState([]);
+  let [events, setEvents] = useState<Map<string, Event[]>>(new Map<string, Event[]>());
   let [inputUrl, setInputUrl] = useState('');
 
   function handleClick() {
@@ -55,3 +74,4 @@ function App() {
 }
 
 export default App;
+export { EventTable };

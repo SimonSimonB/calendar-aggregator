@@ -21,7 +21,7 @@ impl EventExtractor for LargestElementWithSingleDateExtractor {
       if start_elements.len() > 0 {
         let mut events = element_to_events(&start_elements[0]);
         events = events.into_iter().filter(|event| { 
-          match event.time.start {
+          match event.time {
             NaiveDateWithOptionalTime::NaiveDate(d) => !d.lt(from_date),
             NaiveDateWithOptionalTime::NaiveDateTime(d) => !d.date().lt(from_date),
           }
@@ -84,7 +84,7 @@ fn element_to_one_event(el: &ElementRef) -> Option<Event> {
     return None
   }
 
-  Some(Event::new(&text, date.date, None))
+  Some(Event::new(&text, date.date))
 }
 
 fn extract_text(div: &ElementRef, date_text: &str) -> String {
