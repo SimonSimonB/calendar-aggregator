@@ -1,23 +1,15 @@
-* step 2: if you have a good, robust extractor service, relegate the current website to /debug and write a nicer one
-  * offer and consume simple api: list of urls in, list of events back (no fancy asynchronous returning etc.)
-  * layout
-    * it should look fun and make you want to do stuff
-    * where to position url input
-      * top
-      * sidebar
-    * how to position events
-      * one event per row, maybe with subgroups for each day
-        - lots of unused space for the many people with wide screens
-        + can be made very compact, like gmail inbox
-      * in a grid, from left to right and top to bottom, one card per event
-        - might look dull because you don't have pictures for events
+* frontend
+  * save urls in localstorage
+  * make layout more fun
+    * it should look playful and make you want to do stuff
 
 * further improvements to event extraction
-  * it might be better to filter out date strings only when you check whether the text is long enough to plausibly be an event, but not when you
+  * it might be better to filter out date strings only when you check whether the text is long enough to plausibly be an event, but not when you extract the event text
   * make websites work with selenium
     * two tests for that already
-  * can you leverage ul structures, where present?
-  * backlog of websites that don't work
+  * can you leverage ul structures where present?
+  * make these websites work 
     * https://www.staatsschauspiel-dresden.de/spielplan/monatsplan/
     * https://theater-hamburg.org/de_DE/spielplan?myprofile=false&category_system=from_file&date=28.08.2022
+
 * cache events, return from cache if updated <=5min ago, and use etag to ask website whether it's HTML has changed if >5min ago

@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Chip from '@mui/material/Chip';
+import { Table, TableBody, TableCell, TableRow } from '@mui/material';
+
+interface DateWithOptionalTime {
+  value: Date
+  isTimeMeaningful: boolean
+}
 
 export interface Event {
   text: string,
-  time: any,
+  dateTime: DateWithOptionalTime,
 }
 
-async function getEvents(calendarUrl: string) {
+async function getEvents(calendarUrls: string[]) {
   const response = await fetch('http://127.0.0.1:8000/api/events', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({'urls': [calendarUrl]}),
+    body: JSON.stringify({'urls': calendarUrls}),
   });
 
   const json = await response.json();
-  return new Map<string, Event[]>(Object.entries(json));
+  let events = new Map<string, Event[]>();
+  for(const [url, eventsForUrl] of Object.entries<any>(json)) {
+    events.set(
+      url, 
+      eventsForUrl.map((eventFromApi: any) => {
+        return {
+          text: eventFromApi.text,
+          dateTime: {value: new Date(eventFromApi.time.NaiveDate.date), isTimeMeaningful: false},
+        };
+      })
+    )
+  }
+  return events;
 }
 
 interface EventWithUrl {
@@ -29,45 +50,74 @@ function EventTable(props: {events: Map<string, Event[]>}) {
     .map(([url, events]) => events.map<EventWithUrl>((event) => {return {url: url, event: event};}))
     .flat()
     .flat();
-  allEvents.sort((eventWithUrl1, eventWithUrl2) => eventWithUrl1.event.time > eventWithUrl2.event.time ? 1 : -1)
+  allEvents.sort((eventWithUrl1, eventWithUrl2) => eventWithUrl1.event.dateTime.value < eventWithUrl2.event.dateTime.value ? -1 : 1)
   return (
-    <div>
-      <div>
-        {Array.from(props.events.values())
-          .map((eventsForUrl) => eventsForUrl.length)
-          .reduce((acc: number, currentValue: number) => acc + currentValue, 0)}
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>What</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allEvents.map((eventWithUrl) => 
-            <tr>
-              <td>{JSON.stringify(eventWithUrl.event.time.NaiveDate.date)}</td>
-              <td>{eventWithUrl.event.text}</td>
-            </tr>)}
-          </tbody>
-      </table>
-    </div>
+    <Table>
+      <TableBody>
+        {allEvents.map((eventWithUrl) => 
+          <TableRow>
+            <TableCell>
+              {`${eventWithUrl.event.dateTime.value.getMonth() + 1}/${eventWithUrl.event.dateTime.value.getDate()}`}
+            </TableCell>
+            <TableCell>
+              {eventWithUrl.event.text}
+            </TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  );
+}
+
+function Input(props: {selectedOptions: any[], setSelectedOptions: any}) {
+  return (
+    <Autocomplete
+      options={[]}
+      multiple 
+      value={props.selectedOptions}
+      open={false}
+      freeSolo
+      onChange={(_, newValue: string[]) => {
+        console.log(newValue);
+        props.setSelectedOptions(newValue);
+      }}
+      renderTags={(value: readonly string[], getTagProps) =>
+        value.map((option: string, index: number) => (
+          <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+        ))
+      }
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="filled"
+          label="calendar URLs"
+          placeholder="paste URLs here"
+        />
+      )}
+    />
   )
 }
 
 function App() {
   let [events, setEvents] = useState<Map<string, Event[]>>(new Map<string, Event[]>());
-  let [inputUrl, setInputUrl] = useState('');
+  let [calendarUrls, setCalendarUrls] = useState<string[]>([]);
+  useEffect(getAndShowEvents, [calendarUrls]);
 
-  function handleClick() {
-    getEvents(inputUrl).then(events => setEvents(events));
+  function getAndShowEvents() {
+    getEvents(calendarUrls).then(events => setEvents(events));
   }
 
   return (
     <div className="App">
-      <input onChange={e => setInputUrl(e.target.value)}></input>
-      <button onClick={handleClick}>Extract events</button>
+      <Input 
+        setSelectedOptions={
+          (newCalendarUrls: string[]) => {
+            setCalendarUrls(newCalendarUrls); 
+            getAndShowEvents();
+          }
+        }
+        selectedOptions={calendarUrls}
+      />
       <EventTable events={events} />
     </div>
   );
