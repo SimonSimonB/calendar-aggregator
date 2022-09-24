@@ -1,14 +1,16 @@
 * frontend
+  * sort results on a single day by their URL
+  * show url from which event was extracted somewhere in frontend
+  * make events clickable (to URL from which they were extracted)
   * make layout more fun
     * it should look playful and make you want to do stuff
+  * show in frontend that when you're waiting for the backend
+  * stream events from backend to frontend (?)
 
-* further improvements to event extraction
-  * it might be better to filter out date strings only when you check whether the text is long enough to plausibly be an event, but not when you extract the event text
-  * make websites work with selenium
-    * two tests for that already
-  * can you leverage ul structures where present?
+* improve event extraction
   * make these websites work 
     * https://www.staatsschauspiel-dresden.de/spielplan/monatsplan/
     * https://theater-hamburg.org/de_DE/spielplan?myprofile=false&category_system=from_file&date=28.08.2022
-
-* cache events, return from cache if updated <=5min ago, and use etag to ask website whether it's HTML has changed if >5min ago
+  * make websites work with selenium
+    * two tests for that already
+  * can you leverage ul structures where present?

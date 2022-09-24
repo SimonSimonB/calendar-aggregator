@@ -79,7 +79,7 @@ fn element_to_one_event(el: &ElementRef) -> Option<Event> {
   }
   let date = &dates[0];
 
-  let text = extract_text(el, &date.matched_string);
+  let text = extract_text(el);
   if text.len() <= 15 {
     return None
   }
@@ -87,10 +87,10 @@ fn element_to_one_event(el: &ElementRef) -> Option<Event> {
   Some(Event::new(&text, date.date))
 }
 
-fn extract_text(div: &ElementRef, date_text: &str) -> String {
-  let all_text: String = div.text().collect::<String>();
+fn extract_text(div: &ElementRef) -> String {
+  let all_text: String = div.text()
+    .map(|s| format!("{} ", s))
+    .collect::<String>();
   // Replace all sequences of whitespaces with a single white space
-  let mut text = Regex::new(r"\s+").unwrap().replace_all(&all_text, " ").to_string();
-  text = text.replace(date_text, "");
-  return text;
+  return Regex::new(r"\s+").unwrap().replace_all(&all_text, " ").to_string();
 }

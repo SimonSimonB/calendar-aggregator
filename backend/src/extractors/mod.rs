@@ -42,7 +42,13 @@ impl From<NaiveDate> for NaiveDateWithOptionalTime {
   }
 }
 
-#[derive(Debug, serde::Serialize)]
+impl fmt::Display for NaiveDateWithOptionalTime {
+  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    write!(f, "{}", self)
+  }
+}
+
+#[derive(Clone, Debug, serde::Serialize)]
 pub struct Event {
   pub text: String,
   pub time: NaiveDateWithOptionalTime,
@@ -51,12 +57,6 @@ pub struct Event {
 impl fmt::Display for Event {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     write!(f, "{} {}", self.text, self.time)
-  }
-}
-
-impl fmt::Display for NaiveDateWithOptionalTime {
-  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    write!(f, "{}", self)
   }
 }
 
