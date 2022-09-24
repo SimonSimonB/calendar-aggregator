@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import { Table, TableBody, TableCell, TableRow } from '@mui/material';
 
+const CALENDAR_URLS_LOCAL_STORAGE_KEY = 'calendar-urls';
+
 interface DateWithOptionalTime {
   value: Date
   isTimeMeaningful: boolean
@@ -100,8 +102,10 @@ function Input(props: {selectedOptions: any[], setSelectedOptions: any}) {
 
 function App() {
   let [events, setEvents] = useState<Map<string, Event[]>>(new Map<string, Event[]>());
-  let [calendarUrls, setCalendarUrls] = useState<string[]>([]);
+  const calendarUrlsInitialValue = JSON.parse(localStorage.getItem(CALENDAR_URLS_LOCAL_STORAGE_KEY) ?? "[]");
+  let [calendarUrls, setCalendarUrls] = useState<string[]>(calendarUrlsInitialValue);
   useEffect(getAndShowEvents, [calendarUrls]);
+  useEffect(() => localStorage.setItem('calendar-urls', JSON.stringify(calendarUrls)), [calendarUrls]);
 
   function getAndShowEvents() {
     getEvents(calendarUrls).then(events => setEvents(events));

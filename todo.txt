@@ -1,5 +1,4 @@
 * frontend
-  * save urls in localstorage
   * make layout more fun
     * it should look playful and make you want to do stuff
 
