@@ -7,14 +7,9 @@ import { Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 const CALENDAR_URLS_LOCAL_STORAGE_KEY = 'calendar-urls';
 
-interface DateWithOptionalTime {
-  value: Date
-  isTimeMeaningful: boolean
-}
-
 export interface Event {
   text: string,
-  dateTime: DateWithOptionalTime,
+  date: Date,
 }
 
 async function getEvents(calendarUrls: string[]) {
@@ -34,7 +29,7 @@ async function getEvents(calendarUrls: string[]) {
       eventsForUrl.map((eventFromApi: any) => {
         return {
           text: eventFromApi.text,
-          dateTime: {value: new Date(eventFromApi.time.NaiveDate.date), isTimeMeaningful: false},
+          date: new Date(eventFromApi.date),
         };
       })
     )
@@ -52,14 +47,14 @@ function EventTable(props: {events: Map<string, Event[]>}) {
     .map(([url, events]) => events.map<EventWithUrl>((event) => {return {url: url, event: event};}))
     .flat()
     .flat();
-  allEvents.sort((eventWithUrl1, eventWithUrl2) => eventWithUrl1.event.dateTime.value < eventWithUrl2.event.dateTime.value ? -1 : 1)
+  allEvents.sort((eventWithUrl1, eventWithUrl2) => eventWithUrl1.event.date < eventWithUrl2.event.date ? -1 : 1)
   return (
     <Table>
       <TableBody>
         {allEvents.map((eventWithUrl) => 
           <TableRow>
             <TableCell>
-              {`${eventWithUrl.event.dateTime.value.getMonth() + 1}/${eventWithUrl.event.dateTime.value.getDate()}`}
+              {`${eventWithUrl.event.date.getMonth() + 1}/${eventWithUrl.event.date.getDate()}`}
             </TableCell>
             <TableCell>
               {eventWithUrl.event.text}

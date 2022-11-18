@@ -6,8 +6,8 @@ describe('table component', () => {
   test('renders event text', () => {
     let events = new Map<string, Event[]>([
       ['url1', [
-        {text: 'Concert1', dateTime: {value: new Date('2022-08-07'), isTimeMeaningful: false}}, 
-        {text: 'Concert2', dateTime: {value: new Date('2022-08-07'), isTimeMeaningful: false}},
+        {text: 'Concert1', date: new Date('2022-08-07')}, 
+        {text: 'Concert2', date: new Date('2022-08-07')},
       ]],
     ]);
     render(<EventTable events={events}/>);

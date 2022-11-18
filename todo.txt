@@ -7,10 +7,12 @@
   * show in frontend that when you're waiting for the backend
   * stream events from backend to frontend (?)
 
-* improve event extraction
-  * make these websites work 
-    * https://www.staatsschauspiel-dresden.de/spielplan/monatsplan/
-    * https://theater-hamburg.org/de_DE/spielplan?myprofile=false&category_system=from_file&date=28.08.2022
-  * make websites work with selenium
-    * two tests for that already
-  * can you leverage ul structures where present?
+* backend
+  * improve event extraction
+    * make these websites work 
+      * https://www.staatsschauspiel-dresden.de/spielplan/monatsplan/
+      * https://theater-hamburg.org/de_DE/spielplan?myprofile=false&category_system=from_file&date=28.08.2022
+    * make websites work with selenium
+      * two tests for that already
+    * can you leverage ul structures where present?
+  * add cache expiration
