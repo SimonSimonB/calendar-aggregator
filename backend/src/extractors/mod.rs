@@ -6,7 +6,7 @@ mod date_extraction;
 pub mod largest_element_with_single_date;
 
 pub trait EventExtractor {
-    fn code_to_events(website_code: &str, from_date: &NaiveDate) -> Vec<Event>;
+    fn html_to_events(html: &str, from_date: &NaiveDate) -> Vec<Event>;
 }
 
 

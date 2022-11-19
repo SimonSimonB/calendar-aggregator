@@ -7,10 +7,10 @@ use default_extractor::extractors::{
 
 #[test]
 fn test_some_events_from_theater_essen() {
-    let test_response = get_test_response("theater-essen.html");
+    let test_html = get_html("theater-essen.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -19,10 +19,10 @@ fn test_some_events_from_theater_essen() {
 
 #[test]
 fn test_some_events_from_ruhr_museum() {
-    let test_response = get_test_response("ruhr-museum.html");
+    let test_html = get_html("ruhr-museum.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -35,10 +35,10 @@ fn test_some_events_from_ruhr_museum() {
 
 #[test]
 fn test_some_events_from_tonhalle() {
-    let test_response = get_test_response("tonhalle.html");
+    let test_html = get_html("tonhalle.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -51,10 +51,10 @@ fn test_some_events_from_tonhalle() {
 
 #[test]
 fn test_some_events_from_koelner_philharmonie() {
-    let test_response = get_test_response("koelner-philharmonie.html");
+    let test_html = get_html("koelner-philharmonie.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -67,10 +67,10 @@ fn test_some_events_from_koelner_philharmonie() {
 
 #[test]
 fn test_some_events_from_elbphilharmonie() {
-    let test_response = get_test_response("elbphilharmonie.html");
+    let test_html = get_html("elbphilharmonie.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -83,10 +83,10 @@ fn test_some_events_from_elbphilharmonie() {
 
 #[test]
 fn test_some_events_from_gruga() {
-    let test_response = get_test_response("gruga.html");
+    let test_html = get_html("gruga.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -101,10 +101,10 @@ fn test_some_events_from_gruga() {
 #[ignore]
 // To get this test to work, you'll need to switch from HTTP request to headless browser executing the JS.
 fn test_some_events_from_theater_hamburg() {
-    let test_response = get_test_response("theater-hamburg.html");
+    let test_html = get_html("theater-hamburg.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
@@ -119,20 +119,35 @@ fn test_some_events_from_theater_hamburg() {
 #[ignore]
 // To get this test to work, you'll need to switch from HTTP request to headless browser executing the JS.
 fn test_some_events_from_radio_essen() {
-    let test_response = get_test_response("radio-essen.html");
+    let test_html = get_html("radio-essen.html");
 
-    let results = LargestElementWithSingleDateExtractor::code_to_events(
-        &test_response,
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
         &NaiveDate::from_ymd(2022, 8, 1),
     );
     assert!(10 < results.len());
     assert!(results.len() < 70);
 }
 
-fn get_test_response(name: &str) -> String {
-    let mut test_response_file = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    test_response_file.push("tests/test_responses/");
-    test_response_file.push(name);
+#[test]
+fn test_fake_website() {
+    let test_html = get_html("fake-website.html");
 
-    fs::read_to_string(test_response_file).unwrap()
+    let results = LargestElementWithSingleDateExtractor::html_to_events(
+        &test_html,
+        &NaiveDate::from_ymd(2022, 1, 1),
+    );
+    assert!(results.len() == 2);
+    assert!(results
+        .into_iter()
+        .find(|r| r.text.contains("Taylor Swift"))
+        .is_some())
+}
+
+fn get_html(name: &str) -> String {
+    let mut html_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    html_path.push("tests/test_html/");
+    html_path.push(name);
+
+    fs::read_to_string(html_path).unwrap()
 }

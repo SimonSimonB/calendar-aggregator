@@ -9,8 +9,8 @@ use super::EventExtractor;
 pub struct LargestElementWithSingleDateExtractor {}
 
 impl EventExtractor for LargestElementWithSingleDateExtractor {
-    fn code_to_events(website_code: &str, from_date: &NaiveDate) -> Vec<Event> {
-        let document = scraper::Html::parse_document(website_code);
+    fn html_to_events(html: &str, from_date: &NaiveDate) -> Vec<Event> {
+        let document = scraper::Html::parse_document(html);
         let start_elements_to_try = ["main", "body", "html"];
         for start_element in start_elements_to_try {
             let main_selector = scraper::Selector::parse(start_element).unwrap();
@@ -20,7 +20,7 @@ impl EventExtractor for LargestElementWithSingleDateExtractor {
                 let mut events = element_to_events(&start_elements[0]);
                 events = events
                     .into_iter()
-                    .filter(|event| event.date.lt(from_date))
+                    .filter(|event| event.date.ge(from_date))
                     .collect();
                 return events;
             }

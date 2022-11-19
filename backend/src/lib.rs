@@ -19,9 +19,9 @@ pub async fn extract(url: &str) -> Result<Vec<Event>, Box<dyn Error>> {
         fully_specified_url = format!("http://{}", url);
     }
     let url_parsed = Url::parse(&fully_specified_url)?;
-    let website_code = get(url_parsed).await?;
-    Ok(LargestElementWithSingleDateExtractor::code_to_events(
-        &website_code,
+    let html = get(url_parsed).await?;
+    Ok(LargestElementWithSingleDateExtractor::html_to_events(
+        &html,
         &Utc::now().naive_utc().date(),
     ))
 }
