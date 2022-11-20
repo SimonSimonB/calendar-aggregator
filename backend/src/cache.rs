@@ -40,14 +40,22 @@ impl Cache for RedisCache {
     }
 
     fn get(&mut self, url: &str) -> Option<Vec<Event>> {
-        match self.connection.get::<&str, String>(url) {
-            Ok(events_serialized) => {
-                println!("Cache hit for key {}\nValue: {:?}", url, events_serialized);
-                Some(serde_json::from_str::<Vec<Event>>(&events_serialized).unwrap())
+        match self.connection.get::<&str, Option<String>>(url) {
+            Ok(value) => {
+                match value {
+                    Some(events_serialized) => {
+                        println!("Cache hit for key {}\nValue length: {}", url, events_serialized.len());
+                        Some(serde_json::from_str::<Vec<Event>>(&events_serialized).unwrap())
+                    },
+                    None => {
+                        println!("Cache miss for key {}", url);
+                        None
+                    },
+                }
             },
             Err(e) => {
                 println!("Error while querying key {}: {}", url, e);
-                None
+                panic!();
             },
         }
     }
