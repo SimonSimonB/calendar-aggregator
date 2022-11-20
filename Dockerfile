@@ -1,6 +1,8 @@
 FROM node:19-alpine3.15 as FRONTEND_BUILD
-COPY frontend /app/frontend/
 WORKDIR /app/frontend/
+COPY frontend/package*.json .
+RUN npm install
+COPY frontend/ .
 RUN npm run build
 
 FROM rust:1.64-buster
