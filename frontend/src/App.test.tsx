@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { EventTable, Event } from './App';
+import { EventTable, Event } from './Debug';
 
 describe('table component', () => {
   test('renders event text', () => {

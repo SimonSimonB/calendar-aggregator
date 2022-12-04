@@ -18,3 +18,4 @@ regex = "1.6.0"
 rocket = {version = "0.5.0-rc.2", features = ["json"]}                  # Web framework for nightly with a focus on ease-of-use, expressibility, and speed. 
 serde = { version = "1.0", features = ["derive"] }
 redis = "0.22.1"
+sqlx = { version = "0.6.2", features = ["postgres", "offline", "runtime-tokio-native-tls"] }

@@ -4,12 +4,26 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - ROCKET_PORT=8000
+      - ROCKET_PORT=${WEB_PORT}
       - ROCKET_ADDRESS=0.0.0.0
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      - "8000:8000"
+      - "${WEB_PORT}:${WEB_PORT}"
     depends_on:
       - redis
+      - db
+  db:
+    image: postgres:15.1
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:5432"
   redis:
     image: redis:7.0
     ports:

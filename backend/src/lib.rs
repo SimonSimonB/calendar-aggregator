@@ -2,12 +2,15 @@ use std::error::Error;
 
 use chrono::Utc;
 use extractors::{
-    largest_element_with_single_date::LargestElementWithSingleDateExtractor, Event, EventExtractor,
+    largest_element_with_single_date::LargestElementWithSingleDateExtractor, EventExtractor,
 };
+use models::Event;
 use reqwest::Url;
 
 pub mod cache;
 pub mod extractors;
+pub mod repository;
+pub mod models;
 
 async fn get(url: Url) -> Result<String, reqwest::Error> {
     reqwest::get(url).await?.text().await

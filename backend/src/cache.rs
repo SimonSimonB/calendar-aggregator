@@ -1,10 +1,10 @@
 extern crate redis;
+use crate::models::Event;
 use redis::Commands;
 use redis::Connection;
 use rocket::serde::json::serde_json;
-use crate::extractors::Event;
 
-pub trait Cache {
+pub trait Cache: Send + Sync {
     fn set(&mut self, url: &str, events: Vec<Event>);
     fn get(&mut self, url: &str) -> Option<Vec<Event>>;
 }
@@ -41,22 +41,24 @@ impl Cache for RedisCache {
 
     fn get(&mut self, url: &str) -> Option<Vec<Event>> {
         match self.connection.get::<&str, Option<String>>(url) {
-            Ok(value) => {
-                match value {
-                    Some(events_serialized) => {
-                        println!("Cache hit for key {}\nValue length: {}", url, events_serialized.len());
-                        Some(serde_json::from_str::<Vec<Event>>(&events_serialized).unwrap())
-                    },
-                    None => {
-                        println!("Cache miss for key {}", url);
-                        None
-                    },
+            Ok(value) => match value {
+                Some(events_serialized) => {
+                    println!(
+                        "Cache hit for key {}\nValue length: {}",
+                        url,
+                        events_serialized.len()
+                    );
+                    Some(serde_json::from_str::<Vec<Event>>(&events_serialized).unwrap())
+                }
+                None => {
+                    println!("Cache miss for key {}", url);
+                    None
                 }
             },
             Err(e) => {
                 println!("Error while querying key {}: {}", url, e);
                 panic!();
-            },
+            }
         }
     }
 }

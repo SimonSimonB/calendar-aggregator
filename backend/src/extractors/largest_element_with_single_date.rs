@@ -3,7 +3,7 @@ use regex::Regex;
 use scraper::ElementRef;
 
 use super::date_extraction;
-use super::Event;
+use super::super::models::Event;
 use super::EventExtractor;
 
 pub struct LargestElementWithSingleDateExtractor {}
