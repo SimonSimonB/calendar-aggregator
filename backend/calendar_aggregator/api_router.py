@@ -23,4 +23,14 @@ class Router(APIRouter):
                 return event_extractor.extract(await html_fetcher.fetch(url))
 
             events = await asyncio.gather(*(_fetch_events(url) for url in urls_list))
-            return {url: events for url, events in zip(urls_list, events)}
+            result: Dict[str, List[Event]] = {}
+            for url, events in zip(urls_list, events):
+                # Only return events that happen today or in the future.
+                result[url] = [
+                    event
+                    for event in events
+                    if event.date
+                    >= datetime.datetime.today().replace(hour=0, minute=0, second=0)
+                ]
+
+            return result
