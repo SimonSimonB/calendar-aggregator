@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
 import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
+import { useEffect, useState } from 'react';
+import { getEventsForUrls } from './Api';
+import './App.css';
 import EventTable from './EventTable';
-import { getEventsForUrl } from './Api';
 
 const CALENDAR_URL_LOCAL_STORAGE_KEY = 'calendar-url';
 
@@ -13,16 +13,17 @@ export interface Event {
   date: Date,
 }
 
-function Input(props: {selectedOption: any, setSelectedOption: any}) {
+function Input(props: { selectedOptions: string[], setSelectedOptions: (selectedOptions: string[]) => void }) {
   return (
     <Autocomplete
       options={[]}
-      value={props.selectedOption}
+      multiple={true}
+      value={props.selectedOptions}
       open={false}
       freeSolo
-      onChange={(_, newValue: string | null) => {
+      onChange={(_, newValue: string[]) => {
         console.log(newValue);
-        props.setSelectedOption(newValue);
+        props.setSelectedOptions(newValue);
       }}
       renderTags={(value: readonly string[], getTagProps) =>
         value.map((option: string, index: number) => (
@@ -43,27 +44,27 @@ function Input(props: {selectedOption: any, setSelectedOption: any}) {
 
 function Debug() {
   let [events, setEvents] = useState<Map<string, Event[]>>(new Map<string, Event[]>());
-  const calendarUrlInitialValue = JSON.parse(localStorage.getItem(CALENDAR_URL_LOCAL_STORAGE_KEY) ?? "[]");
-  let [calendarUrl, setCalendarUrl] = useState<string | null>(calendarUrlInitialValue);
-  useEffect(getAndShowEvents, [calendarUrl]);
-  useEffect(() => localStorage.setItem('calendar-url', JSON.stringify(calendarUrl)), [calendarUrl]);
+  const calendarUrlsInitialValue = JSON.parse(localStorage.getItem(CALENDAR_URL_LOCAL_STORAGE_KEY) ?? "[]");
+  let [calendarUrls, setCalendarUrls] = useState<string[]>(calendarUrlsInitialValue);
+  useEffect(getAndShowEvents, [calendarUrls]);
+  useEffect(() => localStorage.setItem('calendar-url', JSON.stringify(calendarUrls)), [calendarUrls]);
 
   function getAndShowEvents() {
-    if(calendarUrl != null) {
-      getEventsForUrl(calendarUrl).then(events => setEvents(events));
+    if (calendarUrls.length > 0) {
+      getEventsForUrls(calendarUrls).then(events => setEvents(events));
     }
   }
 
   return (
     <div className="App">
-      <Input 
-        setSelectedOption={
-          (newCalendarUrl: string | null) => {
-            setCalendarUrl(newCalendarUrl); 
+      <Input
+        setSelectedOptions={
+          (newCalendarUrls: string[]) => {
+            setCalendarUrls(newCalendarUrls);
             getAndShowEvents();
           }
         }
-        selectedOption={calendarUrl}
+        selectedOptions={calendarUrls}
       />
       <EventTable events={events} />
     </div>

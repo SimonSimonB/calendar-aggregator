@@ -1,8 +1,8 @@
 import { Event, Topic } from "./Common";
 
-export async function getEventsForUrl(calendarUrl: string) {
+export async function getEventsForUrls(calendarUrls: string[]) {
   const response = await fetch(
-    'http://127.0.0.1:8000/api/events?' + new URLSearchParams({'url': calendarUrl}),
+    'http://127.0.0.1:8000/api/events?' + new URLSearchParams({ 'urls': JSON.stringify(calendarUrls) }),
     {
       method: 'get',
       headers: {
@@ -16,7 +16,7 @@ export async function getEventsForUrl(calendarUrl: string) {
 
 export async function getEventsForTopic(topicId: number) {
   const response = await fetch(
-    'http://127.0.0.1:8000/api/events?' + new URLSearchParams({'topic_id': String(topicId)}),
+    'http://127.0.0.1:8000/api/events?' + new URLSearchParams({ 'topic_id': String(topicId) }),
     {
       method: 'get',
       headers: {
@@ -45,9 +45,9 @@ export async function getAllTopics(): Promise<Topic[]> {
 async function responseToEvents(response: Response) {
   const json = await response.json();
   let events = new Map<string, Event[]>();
-  for(const [url, eventsForUrl] of Object.entries<any>(json)) {
+  for (const [url, eventsForUrl] of Object.entries<any>(json)) {
     events.set(
-      url, 
+      url,
       eventsForUrl.map((eventFromApi: any) => {
         return {
           text: eventFromApi.text,

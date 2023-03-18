@@ -1,8 +1,11 @@
 import asyncio
+import datetime
+import json
 from typing import Dict, List
-from fastapi import APIRouter
-from .event_extraction.interfaces import AbstractEventExtractor
 
+from fastapi import APIRouter
+
+from .event_extraction.interfaces import AbstractEventExtractor
 from .html_fetching.interfaces import AbstractHTMLFetcher
 from .models import Event
 
@@ -16,13 +19,14 @@ class Router(APIRouter):
         super().__init__()
 
         @self.get("/events")
-        async def get_events(url: str) -> Dict[str, List[Event]]:
-            urls_list: List[str] = url.split(",")
+        async def get_events(urls: str) -> Dict[str, List[Event]]:
+            urls_list: List[str] = json.loads(urls)
 
             async def _fetch_events(url: str) -> List[Event]:
                 return event_extractor.extract(await html_fetcher.fetch(url))
 
             events = await asyncio.gather(*(_fetch_events(url) for url in urls_list))
+
             result: Dict[str, List[Event]] = {}
             for url, events in zip(urls_list, events):
                 # Only return events that happen today or in the future.
