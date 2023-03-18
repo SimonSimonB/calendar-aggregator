@@ -8,19 +8,21 @@ from ..models import Event
 from .interfaces import AbstractEventExtractor
 from . import date_extraction
 
+_ObjId = int
+
 
 class RuleBasedExtractor(AbstractEventExtractor):
     """Extracts events from HTML of web pages by apply rule-based heuristics.
 
-    This extractor finds the largest containers in the HTML tree that contain exactly one date, and then attempts to
-    extract one event from each container.
+    This extractor finds the topmost elements in the HTML tree that contain exactly one date, and then attempts to
+    extract one event from each element.
     """
 
     def extract(self, html: str) -> List[Event]:
         events: List[Event] = []
         event_html_elements = RuleBasedExtractor._extract_event_elements(html)
-        for element in event_html_elements:
-            event = RuleBasedExtractor._extract_event(element)
+        for el in event_html_elements:
+            event = RuleBasedExtractor._extract_event(el)
             if event:
                 events.append(event)
 
@@ -28,11 +30,14 @@ class RuleBasedExtractor(AbstractEventExtractor):
 
     @staticmethod
     def _extract_event_elements(html: str) -> List[PageElement]:
-        # We assume that, for each date we detect on the web page, the largest HTML element that contains only that one date describes an event.
         html_tree = BeautifulSoup(html, "html.parser")
 
         event_elements: List[PageElement] = []
         for root in html_tree.contents:
+            # `date_counts` does not map `PageElement` objects to how many dates they contain. Rather, it uses the Python
+            # object IDs as keys. Profiling showed that working with a dictionary of `PageElement`s led to the majority
+            # of time being spent hashing `PageElement` objects. A speedup of a factor ~10 was observed from switching
+            # to object IDs as keys on a benchmark of extracting events from the HTML of ~10 real websites.
             date_counts = RuleBasedExtractor._date_counts(root)
             event_elements.extend(
                 RuleBasedExtractor._largest_elements_with_single_date(root, date_counts)
@@ -41,29 +46,29 @@ class RuleBasedExtractor(AbstractEventExtractor):
         return event_elements
 
     @staticmethod
-    def _date_counts(root: PageElement) -> Dict[PageElement, int]:
+    def _date_counts(root: PageElement) -> Dict[_ObjId, int]:
         # Use an inner function with an accumulator to avoid having to aggregate dictionaries at each node
         def _date_counts_with_accumulator(
-            el: PageElement, result: Dict[PageElement, int]
+            el: PageElement, result: Dict[_ObjId, int]
         ) -> None:
             if isinstance(el, str):
-                result[el] = len(RuleBasedExtractor._extract_dates(el))
+                result[id(el)] = len(RuleBasedExtractor._extract_dates(el))
             elif isinstance(el, Tag):
                 for child in el.contents:
                     _date_counts_with_accumulator(child, result)
-                result[el] = sum(result[child] for child in el.contents)
+                result[id(el)] = sum(result[id(child)] for child in el.contents)
             else:
-                result[el] = 0
+                result[id(el)] = 0
 
-        result: Dict[PageElement, int] = {}
+        result: Dict[_ObjId, int] = {}
         _date_counts_with_accumulator(root, result)
         return result
 
     @staticmethod
     def _largest_elements_with_single_date(
-        el: PageElement, date_counts: Dict[PageElement, int]
+        el: PageElement, date_counts: Dict[_ObjId, int]
     ) -> List[PageElement]:
-        if date_counts[el] == 1:
+        if date_counts[id(el)] == 1:
             return [el]
 
         result: List[PageElement] = []
