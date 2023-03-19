@@ -6,7 +6,7 @@ from .interfaces import AbstractEventFetcher
 
 
 class CachedEventFetcher(AbstractEventFetcher):
-    """A fetcher that caches fetched events, re-fetching only after a specified time period has passed."""
+    """An event fetcher that caches fetched events, re-fetching only after a specified time period has passed."""
 
     def __init__(
         self, event_fetcher: AbstractEventFetcher, cache_expiration_s: float

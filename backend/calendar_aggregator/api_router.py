@@ -20,14 +20,13 @@ class Router(APIRouter):
         async def get_events(urls: str) -> Dict[str, List[Event]]:
             urls_list: List[str] = json.loads(urls)
 
-            async def _fetch_events(url: str) -> List[Event]:
-                return await event_fetcher.fetch(url)
-
-            events = await asyncio.gather(*(_fetch_events(url) for url in urls_list))
+            events = await asyncio.gather(
+                *(event_fetcher.fetch(url) for url in urls_list)
+            )
 
             result: Dict[str, List[Event]] = {}
             for url, events in zip(urls_list, events):
-                # Only return events that happen today or in the future.
+                # Only return events that will happen today or in the future.
                 result[url] = [
                     event
                     for event in events

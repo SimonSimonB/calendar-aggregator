@@ -18,4 +18,4 @@ if __name__ == "__main__":
         ),
         frontend_path=settings.frontend_path,
     )
-    uvicorn.run(app, host="0.0.0.0")
+    uvicorn.run(app, host="0.0.0.0", port=settings.port)
