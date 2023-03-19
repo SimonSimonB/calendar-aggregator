@@ -1,4 +1,4 @@
-import { Event, Topic } from "./Common";
+import { Event } from "./Common";
 
 export async function getEventsForUrls(calendarUrls: string[]) {
   const response = await fetch(
@@ -12,34 +12,6 @@ export async function getEventsForUrls(calendarUrls: string[]) {
   );
 
   return await responseToEvents(response);
-}
-
-export async function getEventsForTopic(topicId: number) {
-  const response = await fetch(
-    'http://127.0.0.1:8000/api/events?' + new URLSearchParams({ 'topic_id': String(topicId) }),
-    {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-      }
-    },
-  );
-
-  return await responseToEvents(response);
-}
-
-export async function getAllTopics(): Promise<Topic[]> {
-  const response = await fetch(
-    'http://127.0.0.1:8000/api/topics',
-    {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-      }
-    },
-  );
-
-  return await response.json();
 }
 
 async function responseToEvents(response: Response) {
