@@ -56,7 +56,6 @@ function App() {
         setSelectedOptions={
           (newCalendarUrls: string[]) => {
             setCalendarUrls(newCalendarUrls);
-            getAndShowEvents();
           }
         }
         selectedOptions={calendarUrls}
