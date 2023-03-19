@@ -22,7 +22,7 @@ class _DateWithOptionalYear:
 class DateExtractor(abc.ABC):
     def extract_dates(self, text: str) -> List[datetime.datetime]:
         text_cleaned = text.replace("\n", " ")
-        all_groups = re.findall(self._regex(), text_cleaned)
+        all_groups = re.findall(self._regex(), text_cleaned, re.IGNORECASE)
 
         dates: List[datetime.datetime] = []
         for groups in all_groups:
@@ -62,19 +62,19 @@ class DDMMYYYYExtractor(DateExtractor):
 
 class DayMonthEnglishExtractor(DateExtractor):
     def __init__(self) -> None:
-        self._german_months = {
-            "January": 1,
-            "February": 2,
-            "March": 3,
-            "April": 4,
-            "May": 5,
-            "June": 6,
-            "July": 7,
-            "August": 8,
-            "September": 9,
-            "October": 10,
-            "November": 11,
-            "December": 12,
+        self._english_months = {
+            "january": 1,
+            "february": 2,
+            "march": 3,
+            "april": 4,
+            "may": 5,
+            "june": 6,
+            "july": 7,
+            "august": 8,
+            "september": 9,
+            "october": 10,
+            "november": 11,
+            "december": 12,
         }
 
     def _regex(self) -> str:
@@ -82,8 +82,8 @@ class DayMonthEnglishExtractor(DateExtractor):
         long_and_short_month_names = list(
             chain(
                 *zip(
-                    self._german_months.keys(),
-                    (month[:3] for month in self._german_months.keys()),
+                    self._english_months.keys(),
+                    (month[:3] for month in self._english_months.keys()),
                 )
             )
         )
@@ -95,14 +95,14 @@ class DayMonthEnglishExtractor(DateExtractor):
         month = next(
             (
                 long_month
-                for long_month in self._german_months
-                if long_month[:3] == month[:3]
+                for long_month in self._english_months
+                if long_month.lower()[:3] == month.lower()[:3]
             ),
             month,
         )
         return _DateWithOptionalYear(
             year=None if year is "" else int(year),
-            month=self._german_months[month],
+            month=self._english_months[month.lower()],
             day=int(day),
         )
 
@@ -110,18 +110,18 @@ class DayMonthEnglishExtractor(DateExtractor):
 class MonthDayEnglishExtractor(DateExtractor):
     def __init__(self) -> None:
         self._german_months = {
-            "January": 1,
-            "February": 2,
-            "March": 3,
-            "April": 4,
-            "May": 5,
-            "June": 6,
-            "July": 7,
-            "August": 8,
-            "September": 9,
-            "October": 10,
-            "November": 11,
-            "December": 12,
+            "january": 1,
+            "february": 2,
+            "march": 3,
+            "april": 4,
+            "may": 5,
+            "june": 6,
+            "july": 7,
+            "august": 8,
+            "september": 9,
+            "october": 10,
+            "november": 11,
+            "december": 12,
         }
 
     def _regex(self) -> str:
@@ -143,13 +143,13 @@ class MonthDayEnglishExtractor(DateExtractor):
             (
                 long_month
                 for long_month in self._german_months
-                if long_month[:3] == month[:3]
+                if long_month.lower()[:3] == month.lower()[:3]
             ),
             month,
         )
         return _DateWithOptionalYear(
             year=None if year is "" else int(year),
-            month=self._german_months[month],
+            month=self._german_months[month.lower()],
             day=int(day),
         )
 
@@ -157,18 +157,18 @@ class MonthDayEnglishExtractor(DateExtractor):
 class GermanMonthsExtractor(DateExtractor):
     def __init__(self) -> None:
         self._german_months = {
-            "Januar": 1,
-            "Februar": 2,
-            "März": 3,
-            "April": 4,
-            "Mai": 5,
-            "Juni": 6,
-            "Juli": 7,
-            "August": 8,
-            "September": 9,
-            "Oktober": 10,
-            "November": 11,
-            "Dezember": 12,
+            "januar": 1,
+            "februar": 2,
+            "märz": 3,
+            "april": 4,
+            "mai": 5,
+            "juni": 6,
+            "juli": 7,
+            "august": 8,
+            "september": 9,
+            "oktober": 10,
+            "november": 11,
+            "dezember": 12,
         }
 
     def _regex(self) -> str:
@@ -190,12 +190,12 @@ class GermanMonthsExtractor(DateExtractor):
             (
                 long_month
                 for long_month in self._german_months
-                if long_month[:3] == month[:3]
+                if long_month.lower()[:3] == month.lower()[:3]
             ),
             month,
         )
         return _DateWithOptionalYear(
             year=None if year is "" else int(year),
-            month=self._german_months[month],
+            month=self._german_months[month.lower()],
             day=int(day),
         )
