@@ -6,21 +6,19 @@ from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 
 from .api_router import Router
-from .event_extraction.interfaces import AbstractEventExtractor
-from .html_fetching.interfaces import AbstractHTMLFetcher
+from .event_fetching.interfaces import AbstractEventFetcher
 
 
 class App(FastAPI):
     def __init__(
         self,
-        html_fetcher: AbstractHTMLFetcher,
-        event_extractor: AbstractEventExtractor,
+        event_fetcher: AbstractEventFetcher,
         frontend_path: Path,
         *args: Any,
         **kwargs: Any
     ) -> None:  # types: ignore
         super().__init__(*args, **kwargs)
-        self.include_router(Router(html_fetcher, event_extractor), prefix="/api")
+        self.include_router(Router(event_fetcher), prefix="/api")
 
         @self.get("/")
         def get_index() -> FileResponse:

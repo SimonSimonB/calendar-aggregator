@@ -4,7 +4,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from calendar_aggregator.event_extraction.rule_based_extractor import RuleBasedExtractor
+from calendar_aggregator.event_fetching.event_extraction.rule_based_extractor import \
+    RuleBasedExtractor
 
 
 def test_extracts_date_from_ddmmyyyy_with_dots() -> None:

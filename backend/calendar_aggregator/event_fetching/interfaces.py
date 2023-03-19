@@ -1,9 +1,10 @@
 import abc
 from typing import List
+
 from ..models import Event
 
 
-class AbstractEventExtractor(abc.ABC):
+class AbstractEventFetcher(abc.ABC):
     @abc.abstractmethod
-    def extract(self, html: str) -> List[Event]:
+    async def fetch(self, url: str) -> List[Event]:
         pass

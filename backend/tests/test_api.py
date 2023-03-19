@@ -4,9 +4,7 @@ from pathlib import Path
 from typing import List
 
 from calendar_aggregator.app import App
-from calendar_aggregator.event_extraction.interfaces import \
-    AbstractEventExtractor
-from calendar_aggregator.html_fetching.interfaces import AbstractHTMLFetcher
+from calendar_aggregator.event_fetching.interfaces import AbstractEventFetcher
 from calendar_aggregator.models import Event
 from fastapi.testclient import TestClient
 
@@ -29,8 +27,7 @@ class TestGetEvents:
         ]
         test_client = TestClient(
             App(
-                html_fetcher=FakeHTMLFetcher(""),
-                event_extractor=FakeEventExtractor(events),
+                event_fetcher=FakeEventFetcher(events),
                 frontend_path=Path("/tmp"),
             )
         )
@@ -44,17 +41,9 @@ class TestGetEvents:
         assert len(returned_events) == 2
 
 
-class FakeHTMLFetcher(AbstractHTMLFetcher):
-    def __init__(self, html: str) -> None:
-        self._html = html
-
-    async def fetch(self, url: str) -> str:
-        return self._html
-
-
-class FakeEventExtractor(AbstractEventExtractor):
+class FakeEventFetcher(AbstractEventFetcher):
     def __init__(self, events: List[Event]) -> None:
         self._events = events
 
-    def extract(self, html: str) -> List[Event]:
+    async def fetch(self, url: str) -> List[Event]:
         return self._events

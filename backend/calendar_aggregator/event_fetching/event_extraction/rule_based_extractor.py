@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 from bs4 import BeautifulSoup, PageElement
 from bs4.element import Tag
 
-from ..models import Event
+from ...models import Event
 from . import date_extraction
 from .interfaces import AbstractEventExtractor
 

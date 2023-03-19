@@ -5,16 +5,14 @@ from typing import Dict, List
 
 from fastapi import APIRouter
 
-from .event_extraction.interfaces import AbstractEventExtractor
-from .html_fetching.interfaces import AbstractHTMLFetcher
+from .event_fetching.interfaces import AbstractEventFetcher
 from .models import Event
 
 
 class Router(APIRouter):
     def __init__(
         self,
-        html_fetcher: AbstractHTMLFetcher,
-        event_extractor: AbstractEventExtractor,
+        event_fetcher: AbstractEventFetcher,
     ) -> None:
         super().__init__()
 
@@ -23,7 +21,7 @@ class Router(APIRouter):
             urls_list: List[str] = json.loads(urls)
 
             async def _fetch_events(url: str) -> List[Event]:
-                return event_extractor.extract(await html_fetcher.fetch(url))
+                return await event_fetcher.fetch(url)
 
             events = await asyncio.gather(*(_fetch_events(url) for url in urls_list))
 
