@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 
-from .api_router import Router
 from .event_fetching.interfaces import AbstractEventFetcher
+from .router import Router
 
 
 class App(FastAPI):

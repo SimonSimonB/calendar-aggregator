@@ -8,12 +8,13 @@ from .event_fetching.html_fetching.html_fetcher import HTMLFetcher
 from .settings import settings
 
 if __name__ == "__main__":
+    event_fetcher = EventFetcher(
+        event_extractor=RuleBasedExtractor(),
+        html_fetcher=HTMLFetcher(),
+    )
     app = App(
         event_fetcher=CachedEventFetcher(
-            EventFetcher(
-                event_extractor=RuleBasedExtractor(),
-                html_fetcher=HTMLFetcher(),
-            ),
+            event_fetcher,
             cache_expiration_s=settings.event_cache_expiration_s,
         ),
         frontend_path=settings.frontend_path,
