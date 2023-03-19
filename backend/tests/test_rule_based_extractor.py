@@ -4,8 +4,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from calendar_aggregator.event_fetching.event_extraction.rule_based_extractor import \
-    RuleBasedExtractor
+from calendar_aggregator.event_fetching.event_extraction.rule_based_extractor import (
+    RuleBasedExtractor,
+)
 
 
 def test_extracts_date_from_ddmmyyyy_with_dots() -> None:
@@ -209,6 +210,22 @@ def test_extracts_multiple_events() -> None:
     )
 
     assert len(events) == 2
+
+
+def test_does_not_extract_if_only_month_year() -> None:
+    events = RuleBasedExtractor().extract(
+        """
+        <html>
+            <body>
+                <div>
+                    From August 2023, there will be plenty of events.
+                </div>
+            </body>
+        </html>
+    """
+    )
+
+    assert len(events) == 0
 
 
 def _generate_tests_for_html_files():

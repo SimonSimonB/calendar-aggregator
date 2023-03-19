@@ -135,7 +135,7 @@ class MonthDayEnglishExtractor(DateExtractor):
             )
         )
         month_regex = "|".join(long_and_short_month_names)
-        return f"({month_regex}).{{0,2}}(\\d\\d)[^\\d]{{0,3}}(\\d\\d\\d\\d)?"
+        return f"({month_regex}).{{0,2}}(\\d\\d)[^\\d]{{1,3}}(\\d\\d\\d\\d)?"
 
     def _parse_groups(self, groups: list[str]) -> _DateWithOptionalYear:
         month, day, year = groups
