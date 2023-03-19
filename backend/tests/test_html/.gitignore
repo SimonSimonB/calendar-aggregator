@@ -1,0 +1,5 @@
+# This folder is meant for HTML of real, third-party websites. For various reasons, we might not want to check
+# those into this repository.
+*
+
+!.gitignore

@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup, PageElement
 from bs4.element import Tag
 
 from ..models import Event
-from .interfaces import AbstractEventExtractor
 from . import date_extraction
+from .interfaces import AbstractEventExtractor
 
 _ObjId = int
 
@@ -56,7 +56,9 @@ class RuleBasedExtractor(AbstractEventExtractor):
             elif isinstance(el, Tag):
                 for child in el.contents:
                     _date_counts_with_accumulator(child, result)
-                result[id(el)] = sum(result[id(child)] for child in el.contents)
+                # It is not enough to sum the date counts of the children here because maybe there is a date in
+                # the concatenation of the texts of the children, but in no individual child.
+                result[id(el)] = len(RuleBasedExtractor._extract_dates(el.text))
             else:
                 result[id(el)] = 0
 
@@ -86,8 +88,9 @@ class RuleBasedExtractor(AbstractEventExtractor):
     def _extract_dates(text: str) -> List[datetime.datetime]:
         date_extractors: List[date_extraction.DateExtractor] = [
             date_extraction.DDMMYYYYExtractor(),
-            date_extraction.GermanShortMonthExtractor(),
-            date_extraction.GermanLongMonthExtractor(),
+            date_extraction.DayMonthEnglishExtractor(),
+            date_extraction.MonthDayEnglishExtractor(),
+            date_extraction.GermanMonthsExtractor(),
         ]
         for date_extractor in date_extractors:
             dates = date_extractor.extract_dates(text)

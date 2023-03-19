@@ -1,7 +1,9 @@
+import datetime
 import glob
-from pathlib import Path
 import sys
+from pathlib import Path
 from typing import Any
+
 from calendar_aggregator.event_extraction.rule_based_extractor import RuleBasedExtractor
 
 
@@ -59,6 +61,76 @@ def test_extracts_date_from_shortened_german_month_names() -> None:
     )
 
     assert (25, 12, 2023) == (
+        events[0].date.day,
+        events[0].date.month,
+        events[0].date.year,
+    )
+
+
+def test_extracts_date_from_shortened_german_month_names_if_year_left_out() -> None:
+    events = RuleBasedExtractor().extract(
+        """
+        <html>
+            <body>
+                <div>
+                    <p>25. Dez: Christmas Party</p>
+                </div>
+            </body>
+        </html>
+    """
+    )
+
+    assert (25, 12, datetime.datetime.today().year) == (
+        events[0].date.day,
+        events[0].date.month,
+        events[0].date.year,
+    )
+
+
+def test_extracts_date_from_english_month_day() -> None:
+    events = RuleBasedExtractor().extract(
+        """
+        <html>
+            <body>
+                <div>
+                    <p>Dec 25th: Christmas Party</p>
+                </div>
+            </body>
+        </html>
+    """
+    )
+
+    assert (25, 12, datetime.datetime.today().year) == (
+        events[0].date.day,
+        events[0].date.month,
+        events[0].date.year,
+    )
+
+
+def test_extracts_date_if_spread_across_multiple_divs() -> None:
+    events = RuleBasedExtractor().extract(
+        """
+        <html>
+            <body>
+                <div>
+                    <div>
+                        <div>
+                            <div class="eventListItem22__weekday">Sun</div>
+                            <div class="eventListItem22__day">19</div>
+                            <div class="eventListItem22__month">Mar</div>
+                            <div class="eventListItem22__year">2023</div>
+                        </div>
+                    </div>
+                    <div class="eventListItem22__info-wrapper">
+                        <h1 class="eventListItem22__title">Authentic Healing, with Kendall Johnson-Smith</h1>
+                    </div>
+                </div>
+            </body>
+        </html>
+    """
+    )
+
+    assert (19, 3, 2023) == (
         events[0].date.day,
         events[0].date.month,
         events[0].date.year,
